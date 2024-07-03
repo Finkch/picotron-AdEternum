@@ -1,23 +1,29 @@
 
 -- represents an entity
 
-include("vec.lua")
+include("lib/vec.lua")
 
 Entity = {}
 Entity.__index = Entity
 
 
 -- constructor
-function Entity:new(health, mass)
+function Entity:new(sprite, health, mass)
     local e = {
-        max_health = health, health = health
+        sprite = sprite, left = false,
+        max_health = health, health = health,
         mass = mass,
-        pos = Vec:new(), vel = Vec:new(), acc = Vec:new()
-        state = false -- Can't act without a state
+        pos = Vec:new(), vel = Vec:new(), acc = Vec:new(),
+        state = false, -- Can't act without a state
         alive = false
     }
     setmetatable(e, Entity)
     return e
+end
+
+-- draws the entity
+function Entity:draw()
+    spr(self.sprite, self.pos.x, self.pos.y, self.left, false)
 end
 
 -- spawns the entity at the location
