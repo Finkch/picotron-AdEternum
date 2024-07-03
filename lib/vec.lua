@@ -61,6 +61,17 @@ function Vec:dir()
 end
 
 
+-- vector-vector operations
+-- note: we overload existing operators to do this
+function Vec:__mod(other) -- dot product!
+    return self.x * other.x + self.y * other.y
+end
+
+function Vec:__pow(other) -- cross product! points towards z
+    return self.x * other.y - self.y * other.x
+end
+
+
 -- comparison operators
 function Vec:__eq(other)
     return self.x == other.x and self.y == other.y
