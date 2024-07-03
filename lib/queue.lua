@@ -19,7 +19,7 @@ end
 function Q:add(datum)
     if (self:full()) return -- don't add if full
 
-    self.data[#self + 1] = datum
+    self[#self + 1] = datum
 end
 
 
@@ -38,11 +38,19 @@ end
 function Q:__tostring()
     local str = ""
     for i = 1, #self do
-        str ..= tostr(self.data[i])
+        str ..= tostr(self[i])
         if (i != #self) str ..= "\n"
     end
 
     return str
+end
+
+function Q:__index(key)
+    -- looks in data
+    if (type(key) == "number") return self.data[key]
+
+    -- makes sure not to override metatable of Q
+    return Q[key]
 end
 
 
