@@ -25,7 +25,7 @@ function Keys:new(buttons)
         keys[buttons[i]] = {
             frames      = 0,        -- frames button has been held down
             down        = false,    -- whether the button is currently down
-            pressed     = false     -- whether the button was initially pressed this frame
+            pressed     = false,    -- whether the button was initially pressed this frame
             released    = false,    -- whether the button was released this frame
         }
     end
