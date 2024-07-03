@@ -8,11 +8,9 @@ Keys.__index = Keys
 -- a globally accessable class representing the keyboard
 keys = {}
 
--- buttons is a list of buttons whose status is tracked
 function init_keys(buttons)
-    return Keys:new(buttons)
+    keys = Keys:new(buttons)
 end
-
 
 
 -- a class to track keyboard state
