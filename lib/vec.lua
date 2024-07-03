@@ -50,6 +50,17 @@ function Vec:__unm()
     return self * -1
 end
 
+
+-- vector operations
+function Vec:mag()
+    return (self.x ^ 2 + self.y ^ 2) ^ 0.5
+end
+
+function Vec:dir()
+    return self / self:mag()
+end
+
+
 -- comparison operators
 function Vec:__eq(other)
     return self.x == other.x and self.y == other.y
