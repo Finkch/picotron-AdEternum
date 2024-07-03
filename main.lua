@@ -19,10 +19,10 @@ function _update()
 	-- updates keyboard
 	keys:update()
 
-	if (keys:down("a")) player:accelerate(Vec:new(-0.25, 0))
-	if (keys:down("d")) player:accelerate(Vec:new(0.25, 0))
-	if (keys:down("w")) player:accelerate(Vec:new(0, -0.25))
-	if (keys:down("s")) player:accelerate(Vec:new(0, 0.25))
+	if (keys:held("a")) player:accelerate(Vec:new(-0.25, 0))
+	if (keys:held("d")) player:accelerate(Vec:new(0.25, 0))
+	if (keys:held("w")) player:accelerate(Vec:new(0, -0.25))
+	if (keys:held("s")) player:accelerate(Vec:new(0, 0.25))
 
 
 	-- applies friction
@@ -35,9 +35,10 @@ function _draw()
 	cls(cl)
 	player:draw()
 	
-	print(keys:frames("e"))
+	print(keys:down("e"))
+	print(keys:up("e"))
 	if (keys:pressed("e")) print("press!")
 	if (keys:released("e")) print("release!")
-	if (keys:down("e")) print("down!")
+	if (keys:held("e")) print("down!")
 
 end
