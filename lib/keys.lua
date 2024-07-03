@@ -21,8 +21,9 @@ function Keys:new(buttons)
     -- gives each button some info
     for i = 1, #buttons do
         keys[buttons[i]] = {
-            frames      = 0,        -- frames button has been held down
-            down        = false,    -- whether the button is currently down
+            down        = 0,        -- frames button has been held down
+            up          = 0,        -- frames the button has been up
+            held        = false,    -- whether the button is currently down
             pressed     = false,    -- whether the button was initially pressed this frame
             released    = false,    -- whether the button was released this frame
         }
@@ -37,34 +38,40 @@ end
 function Keys:update()
     for k, v in pairs(self) do
         if (key(k)) then
-            v.down = true
+            v.held = true
 
             -- checks if the key was pressed this frame
-            v.pressed = v.frames == 0
+            v.pressed = v.down == 0
 
             -- increments frames pressed down
-            v.frames += 1
+            v.down  += 1
+            v.up    =  0
 
         else
-            v.down = false
+            v.held = false
 
             -- checks if the key was released this frame
-            v.released = v.frames > 0
+            v.released = v.up == 0
 
             -- resets frames count
-            v.frames = 0
+            v.down  =  0
+            v.up    += 1
  
         end
     end
 end
 
 -- functions to easily check status of a key
-function Keys:frames(key)
-    return self[key].frames
-end
-
 function Keys:down(key)
     return self[key].down
+end
+
+function Keys:up(key)
+    return self[key].up
+end
+
+function Keys:held(key)
+    return self[key].held
 end
 
 function Keys:pressed(key)
