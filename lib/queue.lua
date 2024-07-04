@@ -53,6 +53,13 @@ function Q:__index(key)
     return Q[key]
 end
 
+function Q:__newindex(key, value)
+    if (type(key) == "number") then
+        self.data[key] = value
+    else
+        rawset(self, key, value)
+    end
+end
 
 -- size
 function Q:__len()
