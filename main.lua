@@ -2,6 +2,7 @@
 
 include("player.lua")
 include("lib/keys.lua")
+include("lib/queue.lua")
 
 
 function _init()
@@ -12,6 +13,9 @@ function _init()
 
 	-- creates the keyboard
 	init_keys({"w", "a", "s", "d", "e"})
+
+	-- message queue for debug printouts
+	debug = Q:new()
 end
 
 function _update()
@@ -24,7 +28,6 @@ function _update()
 	if (keys:held("w")) player:accelerate(Vec:new(0, -0.25))
 	if (keys:held("s")) player:accelerate(Vec:new(0, 0.25))
 
-
 	-- applies friction
 	player.vel /= 1.3
 
@@ -34,11 +37,5 @@ end
 function _draw()
 	cls(cl)
 	player:draw()
-	
-	print(keys:down("e"))
-	print(keys:up("e"))
-	if (keys:pressed("e")) print("press!")
-	if (keys:released("e")) print("release!")
-	if (keys:held("e")) print("down!")
-
+	debug:print()
 end
