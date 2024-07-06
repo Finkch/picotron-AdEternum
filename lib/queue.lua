@@ -1,4 +1,4 @@
---[[pod_format="raw",created="2024-07-06 20:07:26",modified="2024-07-06 20:12:51",revision=26]]
+--[[pod_format="raw",created="2024-07-06 20:07:26",modified="2024-07-06 22:14:07",revision=232]]
 
 
 -- a simple queue-like class
@@ -42,7 +42,7 @@ function Q:__tostring()
     local str = ""
     
     for i = 1, #self do
-        str ..= to_string(self[i])
+        str ..= to_string(self[i]) .. "\n"
     end
 
     return str
