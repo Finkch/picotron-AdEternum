@@ -1,5 +1,7 @@
---[[pod_format="raw",created="2024-07-01 18:29:29",modified="2024-07-06 20:13:56",revision=357]]
+--[[pod_format="raw",created="2024-07-01 18:29:29",modified="2024-07-06 20:22:03",revision=374]]
 
+-- includes finkclib
+rm("/ram/cart/finkchlib") -- makes sure at most one copy is present
 mount("/ram/cart/finkchlib", "/ram/finkchlib")
 
 include("finkchlib/log.lua")
