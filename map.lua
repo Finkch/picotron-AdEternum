@@ -1,4 +1,4 @@
---[[pod_format="raw",created="2024-07-06 21:58:37",modified="2024-07-06 22:19:10",revision=122]]
+--[[pod_format="raw",created="2024-07-06 21:58:37",modified="2024-07-06 23:43:58",revision=464]]
 --[[
 	contains functions for the map
 ]]
@@ -21,5 +21,6 @@ end
 function flag(x, y, n, tiles)
 	if (not tiles) x, y = ct(x, y)
 	
-	return fget(mget(x, y), n)
+	-- this may need to change for other flags
+	return fget(mget(x, y), n) == 1
 end
