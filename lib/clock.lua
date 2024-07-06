@@ -1,4 +1,4 @@
---[[pod_format="raw",created="2024-07-06 20:23:33",modified="2024-07-06 20:52:22",revision=128]]
+--[[pod_format="raw",created="2024-07-06 20:23:33",modified="2024-07-06 20:54:19",revision=133]]
 --[[
 	keeps track of time
 	
@@ -31,5 +31,5 @@ function Clock:__tostring()
 	local m = s // 60
 	local h = m // 60
 	
-	return string.format("%dh %02dm %02ds %02df", h, m % 60, s % 60, self.f % 60)
+	return string.format("%02dh %02dm %02ds %02df", h, m % 60, s % 60, self.f % 60)
 end
