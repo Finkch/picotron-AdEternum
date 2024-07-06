@@ -1,4 +1,4 @@
---[[pod_format="raw",created="2024-07-01 18:29:29",modified="2024-07-06 20:22:03",revision=374]]
+--[[pod_format="raw",created="2024-07-01 18:29:29",modified="2024-07-06 20:52:22",revision=500]]
 
 -- includes finkclib
 rm("/ram/cart/finkchlib") -- makes sure at most one copy is present
@@ -8,6 +8,7 @@ include("finkchlib/log.lua")
 include("player.lua")
 include("lib/keys.lua")
 include("lib/queue.lua")
+include("lib/clock.lua")
 
 
 function _init()
@@ -23,7 +24,7 @@ function _init()
 	debug = Q:new()
 	
 	-- keeps track of frames
-	f = 0
+	clock = Clock:new()
 end
 
 function _update()
@@ -42,8 +43,9 @@ function _update()
 	player:move()
 	
 	-- increments frame count
-	f += 1
-	debug:add(f)
+	clock()
+	
+	debug:add(tostr(clock))
 end
 
 function _draw()
