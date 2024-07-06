@@ -1,4 +1,4 @@
---[[pod_format="raw",created="2024-07-01 18:29:29",modified="2024-07-06 20:12:51",revision=355]]
+--[[pod_format="raw",created="2024-07-01 18:29:29",modified="2024-07-06 20:13:56",revision=357]]
 
 mount("/ram/cart/finkchlib", "/ram/finkchlib")
 
@@ -19,6 +19,9 @@ function _init()
 
 	-- message queue for debug printouts
 	debug = Q:new()
+	
+	-- keeps track of frames
+	f = 0
 end
 
 function _update()
@@ -35,6 +38,10 @@ function _update()
 	player.vel /= 1.3
 
 	player:move()
+	
+	-- increments frame count
+	f += 1
+	debug:add(f)
 end
 
 function _draw()
