@@ -1,4 +1,4 @@
---[[pod_format="raw",created="2024-07-06 21:58:37",modified="2024-07-06 22:15:07",revision=119]]
+--[[pod_format="raw",created="2024-07-06 21:58:37",modified="2024-07-06 22:15:43",revision=121]]
 --[[
 	contains functions for the map
 ]]
@@ -12,7 +12,7 @@ function init_map(tile_width, tile_height)
 	th = tile_height -- tile height
 end
 
--- converts coordinates to tile coordiante
+-- converts coordinates to tile coordinates
 function ct(x, y)
 	return x // tw, y // th
 end
