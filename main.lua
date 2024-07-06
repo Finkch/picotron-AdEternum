@@ -1,5 +1,8 @@
---[[pod_format="raw",created="2024-07-01 18:29:29",modified="2024-07-03 20:14:28",revision=326]]
+--[[pod_format="raw",created="2024-07-01 18:29:29",modified="2024-07-06 20:12:51",revision=355]]
 
+mount("/ram/cart/finkchlib", "/ram/finkchlib")
+
+include("finkchlib/log.lua")
 include("player.lua")
 include("lib/keys.lua")
 include("lib/queue.lua")
