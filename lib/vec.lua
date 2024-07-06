@@ -1,4 +1,4 @@
---[[pod_format="raw",created="2024-07-01 19:40:30",modified="2024-07-02 19:27:42",revision=63]]
+--[[pod_format="raw",created="2024-07-01 19:40:30",modified="2024-07-06 21:07:23",revision=68]]
 -- Metatable; effectively a class
 
 -- 2d vectors
@@ -80,5 +80,5 @@ end
 
 -- tostring
 function Vec:__tostring()
-    return "(" .. self.x .. ", " .. self.y .. ")"
+    return string.format("(%.2f, %.2f)", self.x, self.y)
 end
