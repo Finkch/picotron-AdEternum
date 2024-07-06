@@ -1,6 +1,9 @@
+--[[pod_format="raw",created="2024-07-06 20:07:26",modified="2024-07-06 20:12:51",revision=26]]
 
 
 -- a simple queue-like class
+
+include("finkchlib/tstr.lua")
 
 Q = {}
 Q.__index = Q
@@ -37,9 +40,9 @@ end
 -- metamethods
 function Q:__tostring()
     local str = ""
+    
     for i = 1, #self do
-        str ..= tostr(self[i])
-        if (i != #self) str ..= "\n"
+        str ..= to_string(self[i])
     end
 
     return str
