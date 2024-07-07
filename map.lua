@@ -1,4 +1,4 @@
---[[pod_format="raw",created="2024-07-06 21:58:37",modified="2024-07-06 23:43:58",revision=464]]
+--[[pod_format="raw",created="2024-07-06 21:58:37",modified="2024-07-07 02:39:34",revision=492]]
 --[[
 	contains functions for the map
 ]]
@@ -7,9 +7,13 @@
 tw = nil
 th = nil
 
+
 function init_map(tile_width, tile_height)
 	tw = tile_width -- tile width
 	th = tile_height -- tile height
+	
+	local rooms = {}
+	return rooms
 end
 
 -- converts coordinates to tile coordinates
