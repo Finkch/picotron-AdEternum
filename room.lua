@@ -88,3 +88,22 @@ function Room:__tostring()
 	return "Room " .. self.id .. ":\t" .. to_string(self.pos, 1)
 end
 
+
+
+
+
+-- wall segment class
+Wall = {}
+Wall.__index = Wall
+
+function Wall:new(p0, p1, n)
+	local w = {
+		p0 = p0,
+		p1 = p1,
+		spawn = p1 - p0,
+		normal = n
+	}
+	setmetatable(w, Wall)
+	return wall
+end
+
