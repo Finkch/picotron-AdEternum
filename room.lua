@@ -17,7 +17,7 @@ Room.__index = Room
 
 -- constructor
 function Room:new(id, position, segments)
-	
+
 	-- finds the centre of the room
 	local centre = Vec:new()
 	for i = 1, #segments do
@@ -98,8 +98,11 @@ Wall.__index = Wall
 
 function Wall:new(p0, p1, n)
 	local w = {
-		p0 = p0,
-		p1 = p1,
+		p0 = nil,
+		p1 = nil,
+		offset = nil,
+		rp0 = p0, -- relative position
+		rp1 = p1,
 		span = p1 - p0,
 		normal = n
 	}
@@ -107,5 +110,9 @@ function Wall:new(p0, p1, n)
 	return wall
 end
 
-
-
+-- updates a wall's true position
+function Wall:set(offset)
+	self.offset = offset
+	self.p0 = self.rp0 + offset
+	self.p1 = self.rp1 + offset
+end
