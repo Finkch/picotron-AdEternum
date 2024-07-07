@@ -1,9 +1,8 @@
---[[pod_format="raw",created="2024-07-06 21:42:09",modified="2024-07-06 23:43:58",revision=613]]
+--[[pod_format="raw",created="2024-07-06 21:42:09",modified="2024-07-07 17:31:19",revision=641]]
 
 -- represents an entity
 
 include("lib/vec.lua")
-include("map.lua")
 
 include("finkchlib/log.lua")
 
@@ -15,6 +14,7 @@ Entity.__index = Entity
 function Entity:new(sprite, health, mass, width, height, step)
 	step = step or 4
     local e = {
+		id = nil,
         sprite = sprite, left = false,
         max_health = health, health = health,
         mass = mass,
@@ -22,6 +22,7 @@ function Entity:new(sprite, health, mass, width, height, step)
         height = height,
         steps = step,	-- how many steps to take for one move
         pos = Vec:new(), vel = Vec:new(), acc = Vec:new(),
+		room = nil,
         state = false, -- Can't act without a state
         alive = false
     }
@@ -36,9 +37,10 @@ function Entity:draw()
 end
 
 -- spawns the entity at the location
-function Entity:spawn(x, y)
-    self.x = x
-    self.y = y
+function Entity:spawn(pos, id, rid)
+    self.pos = pos
+	self.id = id
+	self.room = rid
     self.state = "idle"
     self.alive = true
     return self
