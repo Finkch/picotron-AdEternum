@@ -1,4 +1,4 @@
---[[pod_format="raw",created="2024-07-01 19:40:30",modified="2024-07-06 21:07:23",revision=68]]
+--[[pod_format="raw",created="2024-07-01 19:40:30",modified="2024-07-07 22:07:47",revision=87]]
 -- Metatable; effectively a class
 
 -- 2d vectors
@@ -56,7 +56,7 @@ function Vec:mag()
     return (self.x ^ 2 + self.y ^ 2) ^ 0.5
 end
 
-function Vec:dir()
+function Vec:normal()
     return self / self:mag()
 end
 
