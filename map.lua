@@ -53,6 +53,7 @@ Map.__index = Map
 function Map:new()
 	local m = {
 		rooms = {},
+		loaded = {},
 		entities = {}
 	}
 	setmetatable(m, Map)
@@ -67,6 +68,7 @@ function Map:add(room, connections)
 	end
 
 	self.rooms[room.id] = room
+	self.loaded[room.id] = true
 
 	return self
 end
