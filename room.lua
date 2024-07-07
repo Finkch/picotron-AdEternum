@@ -29,7 +29,7 @@ function Room:new(id, position, segments)
 		id = id,
 		pos = position,
 		segments = segments,
-		centre = centre
+		centre = centre,
 		connections = {},
 		entities = {}
 	}
@@ -40,8 +40,6 @@ end
 -- draws room
 -- for now, just its bounding box
 function Room:draw()
-
-	log(to_string(#self.segments))
 
 	for i = 1, #self.segments do
 		line(
