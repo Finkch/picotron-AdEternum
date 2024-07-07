@@ -161,7 +161,7 @@ function Wall:intersects(q0, q1)
 	return false
 end
 
-function collides(bounding)
+function Wall:collides(bounding)
 	
 	local intersection = false
 
