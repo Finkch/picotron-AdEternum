@@ -17,10 +17,22 @@ function Room:new(id, position)
 	local r = {
 		id = id,
 		pos = pos,
+		connections = {},
 		entities = {}
 	}
 	setmetatable(r, Room)
 	return r
+end
+
+-- adds/removes room connections
+function Room:connection(room)
+	add(self.connections, room)
+	add(room.connections(self))
+end
+
+function Room:deconnect(room)
+	del(self.connections, room)
+	del(room.connections, self)
 end
 
 -- adds or removes an entity from the room
