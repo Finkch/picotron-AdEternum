@@ -24,14 +24,17 @@ function collision(entity, room)
         local p0 = room.pos + room.segments[i][1]
         local p1 = room.pos + room.segments[i][2]
 
-        -- checks an intersection between the segment and all segments of the bounding box
-        if (
-            intersect(p0, p1, top_left, top_right) or
-            intersect(p0, p1, top_right, bottom_right) or
-            intersect(p0, p1, bottom_right, bottom_left) or
-            intersect(p0, p1, bottom_left, top_left)
-        ) then
-            return true
+
+        local intersections = {
+            intersect(p0, p1, top_left, top_right),         -- up
+            intersect(p0, p1, top_right, bottom_right),     -- right
+            intersect(p0, p1, bottom_right, bottom_left),   -- down
+            intersect(p0, p1, bottom_left, top_left)        -- left
+        }
+
+        -- returns if there are any intersections
+        for j = 1, 4 do -- also returns data so we can determine the direction
+            if (intersections[j]) return true, intersections, i
         end
     end
 
