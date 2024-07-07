@@ -68,7 +68,7 @@ end
 -- places the entity at the room origin
 function Room:spawn(entity, eid, pos)
 	local np = Vec:new(entity.pos.x + self.pos.x, entity.pos.y + self.pos.y - entity.height - 1)
-	entity:spawn(np, eid, self.id)
+	entity:spawn(np, eid, self)
 	self:add_entity(entity)
 end
 

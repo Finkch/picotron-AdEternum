@@ -37,10 +37,10 @@ function Entity:draw()
 end
 
 -- spawns the entity at the location
-function Entity:spawn(pos, id, rid)
+function Entity:spawn(pos, id, room)
     self.pos = pos
 	self.id = id
-	self.room = rid
+	self.room = room
     self.state = "idle"
     self.alive = true
     return self
