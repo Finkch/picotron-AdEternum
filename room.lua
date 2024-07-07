@@ -65,8 +65,10 @@ function Room:remove_entity(ent)
 	return self
 end
 
+-- places the entity at the room origin
 function Room:spawn(entity, eid, pos)
-	entity:spawn(pos, eid, self.id)
+	local np = Vec:new(entity.pos.x + self.pos.x, entity.pos.y + self.pos.y - entity.height - 1)
+	entity:spawn(np, eid, self.id)
 	self:add_entity(entity)
 end
 
