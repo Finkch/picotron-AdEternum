@@ -1,4 +1,4 @@
---[[pod_format="raw",created="2024-07-07 02:28:48",modified="2024-07-07 02:39:28",revision=26]]
+--[[pod_format="raw",created="2024-07-07 02:28:48",modified="2024-07-07 02:41:13",revision=27]]
 --[[
 	a room is...a room.
 	
@@ -24,12 +24,12 @@ function Room:new(id, position)
 end
 
 -- adds or removes an entity from the room
-function Room:addent(eid, ent)
+function Room:add_entity(eid, ent)
 	self.entities[eid] = ent
 	return self
 end
 
-function Room:rment(eid)
+function Room:remove_entity(eid)
 	del(self.entities, eid)
 	return self
 end
