@@ -121,3 +121,59 @@ function Wall:set(offset)
 	self.p0 = self.rp0 + offset
 	self.p1 = self.rp1 + offset
 end
+
+
+
+-- collision detection
+function Wall:intersects(q0, q1)
+
+	-- finds the orientation of the order triples (p, q, r)
+	local function orientation(p, q, r)
+		local ori = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y)
+		if (ori == 0) return 0
+		return (ori > 0) and 1 or 2 -- return cases to handle
+	end
+
+	-- determines whether a point lies on the segment
+	local function on_segment(p, q, r)
+		return (
+			q.x <= max(p.x, r.x) and q.x >= min(p.x, r.x) and
+			q.y <= max(p.y, r.y) and q.y >= min(p.y, r.y)
+		)
+	end
+
+	-- gets the orientation of all triplets
+	local ori1 = orientation(self.p0, self.p1, q0)
+	local ori2 = orientation(self.p0, self.p1, q1)
+	local ori3 = orientation(q0, q1, self.p0)
+	local ori4 = orientation(q0, q1, self.p1)
+
+	-- general case
+	if (ori1 != ori2 and ori3 != ori4) return true
+
+	-- special cases
+	if (ori1 == 0 and on_segment(self.p0, q0, self.p1)) return true
+	if (ori2 == 0 and on_segment(self.p0, q1, self.p1)) return true
+	if (ori3 == 0 and on_segment(q0, self.p0, q1)) return true
+	if (ori4 == 0 and on_segment(q0, self.p1, q1)) return true
+
+	-- otherwise, there is no intersection
+	return false
+end
+
+function collides(bounding)
+	
+	local intersection = false
+
+	local intersections = {}
+	for j = 1, #bounding do
+		add(intersections, intersect(bounding[j], bounding[j % 4 + 1]))
+		if (intersections[j]) intersection = true
+	end
+
+	-- if there's an intersection
+	if (intersection) return true
+
+    -- otherwise, there is no collision
+    return false
+end
