@@ -10,6 +10,8 @@
 include("finkchlib/tstr.lua")
 include("entity.lua")
 
+include("finkchlib/log.lua")
+
 Room = {}
 Room.__index = Room
 
@@ -18,12 +20,27 @@ function Room:new(id, position, segments)
 	local r = {
 		id = id,
 		pos = position,
-		seg = segments,
+		segments = segments,
 		connections = {},
 		entities = {}
 	}
 	setmetatable(r, Room)
 	return r
+end
+
+-- draws room
+-- for now, just its bounding box
+function Room:draw()
+
+	log(to_string(#self.segments))
+
+	for i = 1, #self.segments do
+		line(
+			self.pos.x + self.segments[i][1].x, self.pos.y + self.segments[i][1].y,
+			self.pos.x + self.segments[i][2].x, self.pos.y + self.segments[i][2].y,
+			8
+		)
+	end
 end
 
 -- adds/removes room connections
@@ -55,9 +72,10 @@ end
 
 -- metamethods
 function Room:__tostring()
-	local tbl = {} -- creates a table to print
-	tbl["Room " .. self.id .. ":"] = self.entities
+	--local tbl = {} -- creates a table to print
+	--tbl["Room " .. self.id .. ":"] = self.entities
 	
-	return to_string(tbl)
+	--return to_string(tbl)
+	return "Room " .. self.id .. ":\t" .. to_string(self.pos, 1)
 end
 

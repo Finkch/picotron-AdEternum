@@ -23,7 +23,13 @@ function init_map(tile_width, tile_height)
 
 	-- creats some rooms
 	-- just one, for now
-	local start = Room:new(-1, Vec:new(0, 128))
+	local segments = {
+		{Vec:new(-128, 0), Vec:new(128, 0)},
+		{Vec:new(128, 0), Vec:new(128, -48)},
+		{Vec:new(128, -48), Vec:new(0, -48)},
+		{Vec:new(0, -48), Vec:new(0, -32)},
+	}
+	local start = Room:new(-1, Vec:new(128, 255), segments)
 	map:add(start, {})
 
 	return map
@@ -60,6 +66,13 @@ function Map:new()
 	return m
 end
 
+-- draws active rooms
+function Map:draw()
+	for id, room in pairs(self.rooms) do
+		room:draw()
+	end
+end
+
 -- adding/removing rooms
 function Map:add(room, connections)
 
@@ -68,7 +81,7 @@ function Map:add(room, connections)
 	end
 
 	self.rooms[room.id] = room
-	self.loaded[room.id] = true
+	self.loaded[room.id] = true -- all rooms are loaded, for now
 
 	return self
 end
@@ -87,6 +100,13 @@ end
 
 -- metamethods
 function Map:__tostring()
-	return to_string(self.rooms)
+	local str = ""
+
+	for id, room in pairs(self.rooms) do
+		str ..= tostr(room) .. "\n"
+	end
+
+	--return to_string(self.rooms)
+	return str
 end
 
