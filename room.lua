@@ -16,19 +16,24 @@ Room = {}
 Room.__index = Room
 
 -- constructor
-function Room:new(id, position, segments)
+function Room:new(id, position, walls)
+
+	-- sets true position of each wall
+	for wall in all(walls) do
+		wall:set(position)
+	end
 
 	-- finds the centre of the room
 	local centre = Vec:new()
-	for i = 1, #segments do
-		centre += segments[i][1] + segments[i][2]
+	for wall in all(walls) do
+		centre += wall.p0 + wall.p1
 	end
-	centre /= 2 * #segments
+	centre /= 2 * #walls
 
 	local r = {
 		id = id,
 		pos = position,
-		segments = segments,
+		walls = walls,
 		centre = centre,
 		connections = {},
 		entities = {}
@@ -43,8 +48,8 @@ function Room:draw()
 
 	for i = 1, #self.segments do
 		line(
-			self.pos.x + self.segments[i][1].x, self.pos.y + self.segments[i][1].y,
-			self.pos.x + self.segments[i][2].x, self.pos.y + self.segments[i][2].y,
+			self.walls[i].p0.x, self.walls[i].p0.y,
+			self.walls[i].p1.x, self.walls[i].p1.y,
 			8
 		)
 	end
