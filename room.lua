@@ -92,7 +92,7 @@ end
 
 
 
--- wall segment class
+-- wall segment class. floors and ceilings, too
 Wall = {}
 Wall.__index = Wall
 
@@ -100,10 +100,12 @@ function Wall:new(p0, p1, n)
 	local w = {
 		p0 = p0,
 		p1 = p1,
-		spawn = p1 - p0,
+		span = p1 - p0,
 		normal = n
 	}
 	setmetatable(w, Wall)
 	return wall
 end
+
+
 
