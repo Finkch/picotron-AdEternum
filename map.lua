@@ -17,8 +17,8 @@ function init_map(tile_width, tile_height)
 	tw = tile_width -- tile width
 	th = tile_height -- tile height
 	
-	local rooms = {}
-	return rooms
+	local map = Map:new()
+	return map
 end
 
 -- converts coordinates to tile coordinates
