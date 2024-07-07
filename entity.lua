@@ -3,6 +3,7 @@
 -- represents an entity
 
 include("lib/vec.lua")
+include("collision.lua")
 
 include("finkchlib/log.lua")
 
@@ -33,7 +34,17 @@ end
 -- draws the entity
 function Entity:draw()
     spr(self.sprite, self.pos.x, self.pos.y, self.left, false)
-    rect(self.pos.x, self.pos.y, self.pos.x + self.width, self.pos.y + self.height, 8)
+    rect(self.pos.x, self.pos.y, self.pos.x + self.width, self.pos.y + self.height, 18)
+end
+
+-- gets bounding box
+function Entity:bounding()
+	return {
+		entity.pos,                                         -- top left
+		entity.pos + Vec:new(entity.width, 0),              -- top right
+		entity.pos + Vec:new(entity.width, entity.height),  -- bottom right
+		entity.pos + Vec:new(0, entity.height)              -- bottom left
+	}
 end
 
 -- spawns the entity at the location
@@ -88,10 +99,13 @@ function Entity:move()
 	self.vel += self.acc
 
 	-- one computation to get the n-step velocity
+	--[[
 	local nv = self.vel / self.steps
 	for i = 1, self.steps do
 		self:step(nv)
 	end
+	]]
+	self:step(self.vel)
 	
 	self.acc = Vec:new()
 
@@ -107,6 +121,7 @@ function Entity:step(nv)
 	-- gets the would-be position
 	local np = self.pos + nv
 
+	--[[
 	-- cancels velocity in a direction during a collision
 	if (self:collided(np, 1) or self:collided(np, 3)) then
 		self.vel = Vec:new(self.vel.x, 0)
@@ -119,10 +134,18 @@ function Entity:step(nv)
 		nv = self.vel / self.steps
 		np = self.pos + nv
 	end	
+	]]
+
+	-- only one step for now
+	col, intersections = self:collided(np)
+	if (col) then
+		
+	end
 	
 	self.pos = np
 end
 
+--[[
 -- checks if the entity is on the ground
 function Entity:grounded(pos, offset)
 	offset = offset or 0
@@ -133,21 +156,14 @@ function Entity:grounded(pos, offset)
 	-- checks two points to determine if the entity is on the ground
 	return flag(pos.x + 1, y, 0) or flag(pos.x + self.width - 1, y, 0)
 end
+]]
 
-function Entity:collided(pos, dir)
-	dir = dir or -1
+
+-- checks for collisions
+function Entity:collided(pos)
 	pos = pos or self.pos
-	local left = pos.x
-	local right = pos.x + self.width
-	local top = pos.y
-	local bottom = pos.y + self.height
+	local col, intersections = collision(self, self.room)
 
-	local col = (
-		(flag(left + 1, top, 0) or flag(right - 1, top, 0) and (dir == 1 or dir == -1)) or -- top
-		(flag(right, top + 1, 0) or flag(right, bottom - 1) and (dir == 2 or dir == -1)) or -- right
-		(flag(left + 1, bottom, 0) or flag(right - 1, bottom, 0) and (dir == 3 or dir == -1)) or -- bottom
-		(flag(left, top + 1, 0) or flag(left, bottom - 1, 0) and (dir == 4 or dir == -1)) -- left
-	)
-
-	return col
+	if (col) debug:add("collision:\t" .. to_string(intersections))
+	return col, intersections
 end
