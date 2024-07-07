@@ -17,10 +17,19 @@ Room.__index = Room
 
 -- constructor
 function Room:new(id, position, segments)
+	
+	-- finds the centre of the room
+	local centre = Vec:new()
+	for i = 1, #segments do
+		centre += segments[i][1] + segments[i][2]
+	end
+	centre /= 2 * #segments
+
 	local r = {
 		id = id,
 		pos = position,
 		segments = segments,
+		centre = centre
 		connections = {},
 		entities = {}
 	}
