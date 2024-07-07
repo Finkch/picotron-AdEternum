@@ -1,10 +1,11 @@
---[[pod_format="raw",created="2024-07-06 21:58:37",modified="2024-07-07 02:39:34",revision=492]]
+--[[pod_format="raw",created="2024-07-06 21:58:37",modified="2024-07-07 17:31:19",revision=493]]
 --[[
 	contains functions for the map
 ]]
 
 include("finkchlib/tstr.lua")
 include("room.lua")
+include("lib/vec.lua")
 
 -- tile size
 tw = nil
@@ -18,6 +19,13 @@ function init_map(tile_width, tile_height)
 	th = tile_height -- tile height
 	
 	local map = Map:new()
+
+
+	-- creats some rooms
+	-- just one, for now
+	local start = Room:new(-1, Vec:new(0, 128))
+	map:add(start, {})
+
 	return map
 end
 
@@ -40,7 +48,7 @@ end
 
 
 Map = {}
-Map.__index = self
+Map.__index = Map
 
 function Map:new()
 	local m = {
@@ -52,16 +60,15 @@ function Map:new()
 end
 
 -- adding/removing rooms
-function Map:add(rid, pos, connections)
-	local room = Room:new(rid, pos)
+function Map:add(room, connections)
 
 	for i = 1, #connections do
 		room:connect(self.rooms[connections[i]])
 	end
 
-	add(self.rooms, room)
+	self.rooms[room.id] = room
 
-	return map
+	return self
 end
 
 function Map:remove(rid)
@@ -73,7 +80,7 @@ function Map:remove(rid)
 		room:deconnect(room.connections[i])
 	end
 
-	return map
+	return self
 end
 
 -- metamethods
