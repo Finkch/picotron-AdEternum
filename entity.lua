@@ -148,8 +148,6 @@ function Entity:collided(pos, dir)
 		(flag(left + 1, bottom, 0) or flag(right - 1, bottom, 0) and (dir == 3 or dir == -1)) or -- bottom
 		(flag(left, top + 1, 0) or flag(left, bottom - 1, 0) and (dir == 4 or dir == -1)) -- left
 	)
-	
-	if (col) debug:add("collision: " .. dir)
 
 	return col
 end
