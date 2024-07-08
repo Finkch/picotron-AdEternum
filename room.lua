@@ -1,4 +1,4 @@
---[[pod_format="raw",created="2024-07-07 02:28:48",modified="2024-07-07 17:31:56",revision=32]]
+--[[pod_format="raw",created="2024-07-07 02:28:48",modified="2024-07-08 00:25:34",revision=37]]
 --[[
 	a room is...a room.
 	
@@ -200,7 +200,7 @@ function Wall:mtv(bounding, intersections, count) -- finds minimum translation v
 	local dir = nil
 
 	-- if two counts of collision, push normal to wall
-	if (counts > 1) then
+	if (count > 1) then
 
 		if (intersections[2] or intersections[4]) then	-- floor/cieling
 			local dup = self.p0.y - bounding[1].y
