@@ -137,7 +137,7 @@ function Entity:step(nv)
 	]]
 
 	-- only one step for now
-	col, intersections = self:collided(np)
+	col, mtv, dir = self:collided(np)
 	if (col) then
 		
 	end
@@ -162,8 +162,8 @@ end
 -- checks for collisions
 function Entity:collided(pos)
 	pos = pos or self.pos
-	local col, intersections = collision(self, self.room)
+	local col, mtv, dir = self.room:collides(self)
 
-	if (col) debug:add("collision:\t" .. to_string(intersections))
-	return col, intersections
+	if (col) debug:add("collision (" .. dir .. "):\t" .. to_string(mtv))
+	return col, mtv, dir
 end
