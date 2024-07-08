@@ -93,6 +93,19 @@ function Room:__tostring()
 	return "Room " .. self.id .. ":\t" .. to_string(self.pos, 1)
 end
 
+-- collision
+function Room:collides(entity)
+	local col = false
+	local bounding = entity:bounding()
+	local mtv = nil
+	local dir = nil
+
+	for wall in all(self.walls) do
+		col, mtv, dir = wall:collides(bounding)
+
+		if (col) return col, mtv, dir
+	end
+end
 
 
 
@@ -161,7 +174,7 @@ function Wall:intersects(q0, q1) -- intersects a line
 	return false
 end
 
-function Wall:collides(entity, bounding) -- collides with a bounding box
+function Wall:collides(bounding) -- collides with a bounding box
 	
 	local intersection = false
 
@@ -173,13 +186,13 @@ function Wall:collides(entity, bounding) -- collides with a bounding box
 	end
 
 	-- if there's an intersection, finds minimum translation vector.
-	if (count > 0) return true, mtv(bounding, intersections)
+	if (count > 0) return true, mtv(bounding, intersections, count)
 
     -- otherwise, there is no collision
     return false
 end
 
-function Wall:mtv(entity, bounding, intersections, count) -- finds minimum translation vector
+function Wall:mtv(bounding, intersections, count) -- finds minimum translation vector
 
 	-- this implementation only works for walls orthogonal to axis
 
