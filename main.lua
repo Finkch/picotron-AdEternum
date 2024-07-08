@@ -81,7 +81,7 @@ end
 function _draw()
 	cls(cl)
 	
-	cam:focus(player.pos)	
+	cam:focus(player)	
 	cam()
 
 	map(0, 0, 0, 0, 128, 32)
