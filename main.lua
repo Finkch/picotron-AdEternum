@@ -1,4 +1,4 @@
---[[pod_format="raw",created="2024-07-01 18:29:29",modified="2024-07-07 17:36:01",revision=1215]]
+--[[pod_format="raw",created="2024-07-01 18:29:29",modified="2024-07-08 04:33:23",revision=1218]]
 
 -- includes finkclib
 rm("/ram/cart/finkchlib") -- makes sure at most one copy is present
@@ -31,6 +31,12 @@ function _init()
 	
 	-- keeps track of frames
 	clock = Clock:new()
+
+	-- whether to see debug visuals
+	debug_visuals = true
+
+	-- whether to debug printout
+	debug_print = true
 end
 
 function _update()
@@ -44,7 +50,7 @@ function _update()
 	if (keys:held("s")) player:accelerate(Vec:new(0, 0.25))
 
 	-- adds gravity
-	--player.acc.y += 0.11
+	player.acc.y += 0.11
 
 	-- applies friction
 	--[[
@@ -78,7 +84,11 @@ function _draw()
 	
 	camera()
 
-	debug:print()
+	if (debug_print) then -- performs printout, or not
+		debug:print()
+	else
+		debug:clear()
+	end
 
 	-- prints colours out
 	for i = 0, 270 do
