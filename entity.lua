@@ -8,6 +8,7 @@ include("finkchlib/log.lua")
 
 Entity = {}
 Entity.__index = Entity
+Entity.__type = "entity"
 
 
 -- constructor
