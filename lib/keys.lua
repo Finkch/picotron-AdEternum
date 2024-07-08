@@ -1,5 +1,8 @@
+--[[
+    handles keyboard and mouse
+]]
 
--- tracks keyboard inputs
+include("lib/vec.lua")
 
 Keys = {}
 Keys.__index = Keys
@@ -16,11 +19,15 @@ end
 -- a class to track keyboard state
 function Keys:new(buttons)
 
-    local keys = {}
+    local k = {
+        spos = Vec:new(), -- screen coordinates
+        pos  = Vec:new(), -- map coordinates
+        keys = {}
+    }
 
     -- gives each button some info
     for i = 1, #buttons do
-        keys[buttons[i]] = {
+        k.keys[buttons[i]] = {
             down        = 0,        -- frames button has been held down
             up          = 0,        -- frames the button has been up
             held        = false,    -- whether the button is currently down
@@ -29,15 +36,37 @@ function Keys:new(buttons)
         }
     end
 
-    setmetatable(keys, Keys)
-    return keys
+    setmetatable(k, Keys)
+    return k
 end
 
 
 -- checks status of each key being tracked
 function Keys:update()
-    for k, v in pairs(self) do
-        if (key(k)) then
+
+    -- gets mouse state
+    local cx, cy, mb = mouse()
+
+    -- updates mouse position
+    self.spos = Vec:new(cx, cy)
+    self.pos  = self.spos + cam.pos -- need camera position
+
+
+    -- updates all keys
+    for k, v in pairs(self.keys) do
+
+        -- checks if the key is down
+        local kd = nil
+        if (k == "lmb") then
+            kb = mb & 0b1 != 0
+        elseif (k == "rmb") then
+            kb = mb & 0b1 != 0
+        else
+            kd = key(k)
+        end
+
+        -- handles both cases for key up and down
+        if (kd) then
             v.held = true
 
             -- checks if the key was pressed this frame
@@ -63,21 +92,21 @@ end
 
 -- functions to easily check status of a key
 function Keys:down(key)
-    return self[key].down
+    return self.keys[key].down
 end
 
 function Keys:up(key)
-    return self[key].up
+    return self.keys[key].up
 end
 
 function Keys:held(key)
-    return self[key].held
+    return self.keys[key].held
 end
 
 function Keys:pressed(key)
-    return self[key].pressed
+    return self.keys[key].pressed
 end
 
 function Keys:released(key)
-    return self[key].released
+    return self.keys[key].released
 end
