@@ -47,3 +47,13 @@ function Player:draw()
 
 	Entity.draw(self)
 end
+
+
+-- gets player input
+function Player:input()
+	if (kbm:held("a")) player:accelerate(Vec:new(-0.25, 0))
+	if (kbm:held("d")) player:accelerate(Vec:new(0.25, 0))
+	if (kbm:held("w")) player:accelerate(Vec:new(0, -0.25))
+	if (kbm:held("s")) player:accelerate(Vec:new(0, 0.25))
+	if (kbm:pressed("`")) debug_visuals = not debug_visuals
+end
