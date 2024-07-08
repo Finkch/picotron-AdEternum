@@ -4,7 +4,7 @@
 rm("/ram/cart/finkchlib") -- makes sure at most one copy is present
 mount("/ram/cart/finkchlib", "/ram/finkchlib")
 
-include("lib/keys.lua")
+include("lib/kbm.lua")
 include("lib/queue.lua")
 include("lib/clock.lua")
 include("lib/camera.lua")
@@ -30,7 +30,7 @@ function _init()
 	player = Player:new(0, 3, 1)
 
 	-- creates the keyboard
-	keys = KBM:new({"lmb", "rmb", "w", "a", "s", "d", "e", "space", "`"})
+	kbm = KBM:new({"lmb", "rmb", "w", "a", "s", "d", "e", "space", "`"})
 
 	-- tracks map data
 	world = init_map(16, 16)
@@ -59,13 +59,13 @@ end
 function _update()
 
 	-- updates keyboard
-	keys:update()
+	kbm:update()
 
-	if (keys:held("a")) player:accelerate(Vec:new(-0.25, 0))
-	if (keys:held("d")) player:accelerate(Vec:new(0.25, 0))
-	if (keys:held("w")) player:accelerate(Vec:new(0, -0.25))
-	if (keys:held("s")) player:accelerate(Vec:new(0, 0.25))
-	if (keys:pressed("`")) debug_visuals = not debug_visuals
+	if (kbm:held("a")) player:accelerate(Vec:new(-0.25, 0))
+	if (kbm:held("d")) player:accelerate(Vec:new(0.25, 0))
+	if (kbm:held("w")) player:accelerate(Vec:new(0, -0.25))
+	if (kbm:held("s")) player:accelerate(Vec:new(0, 0.25))
+	if (kbm:pressed("`")) debug_visuals = not debug_visuals
 
 	-- adds gravity
 	player.acc.y += 0.11
