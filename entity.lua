@@ -11,7 +11,13 @@ Entity.__index = Entity
 
 
 -- constructor
-function Entity:new(sprite, health, mass, width, height, step)
+function Entity:new(sprite, health, mass, width, height, appendages, step)
+
+	-- sets appendages' owner
+	for appendage in all(appendages) do
+		appendage:body(self)
+	end
+
 	step = step or 4
     local e = {
 		id = nil,
@@ -20,6 +26,7 @@ function Entity:new(sprite, health, mass, width, height, step)
         mass = mass,
         width = width,
         height = height,
+		appendages = appendages,
         steps = step,	-- how many steps to take for one move
         pos = Vec:new(), vel = Vec:new(), acc = Vec:new(),
 		room = nil,
@@ -33,6 +40,10 @@ end
 -- draws the entity
 function Entity:draw()
     spr(self.sprite, self.pos.x, self.pos.y, self.left, false)
+
+	for appendage in all(self.appendages) do
+		appendage:draw()
+	end
 
 	if (debug_visuals) rect(self.pos.x, self.pos.y, self.pos.x + self.width, self.pos.y + self.height, 18)
 end
