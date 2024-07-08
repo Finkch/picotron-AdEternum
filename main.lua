@@ -8,10 +8,12 @@ include("player.lua")
 include("lib/keys.lua")
 include("lib/queue.lua")
 include("lib/clock.lua")
+include("lib/camera.lua")
 include("map.lua")
 
 include("finkchlib/log.lua")
 include("finkchlib/tstr.lua")
+include("finkchlib/ttype.lua")
 
 function _init()
 
@@ -32,8 +34,11 @@ function _init()
 	-- keeps track of frames
 	clock = Clock:new()
 
+	-- handles the camera
+	cam = Camera:new()
+
 	-- whether to see debug visuals
-	debug_visuals = true
+	debug_visuals = false
 
 	-- whether to debug printout
 	debug_print = true
@@ -76,14 +81,15 @@ end
 function _draw()
 	cls(cl)
 	
-	camera(player.pos.x - 240 + player.width, player.pos.y - 135 + player.height)	
+	cam:focus(player.pos)	
+	cam()
 
 	map(0, 0, 0, 0, 128, 32)
 
 	world:draw()
 	player:draw()
 	
-	camera()
+	cam(true)
 
 	if (debug_print) then -- performs printout, or not
 		debug:print()
