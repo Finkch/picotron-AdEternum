@@ -19,5 +19,9 @@ end
 -- metamethods
 function Camera:__call(x, y)
     if (ttype(x) == "vec") x, y = x.x, x.y
-    camera(x - 240, y - 134)
+    if (not x) then
+        camera()
+    else
+        camera(x - 240, y - 135)
+    end
 end 
