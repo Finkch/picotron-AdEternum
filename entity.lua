@@ -33,7 +33,8 @@ end
 -- draws the entity
 function Entity:draw()
     spr(self.sprite, self.pos.x, self.pos.y, self.left, false)
-    rect(self.pos.x, self.pos.y, self.pos.x + self.width, self.pos.y + self.height, 18)
+
+	if (debug_visuals) rect(self.pos.x, self.pos.y, self.pos.x + self.width, self.pos.y + self.height, 18)
 end
 
 -- gets bounding box
