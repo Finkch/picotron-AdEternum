@@ -16,3 +16,9 @@ function State:new(name, animation)
     setmetatable(s, State)
     return s
 end
+
+
+-- increments and returns animation frame
+function State:anim()
+    return self.animation()
+end
