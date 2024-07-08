@@ -1,4 +1,4 @@
---[[pod_format="raw",created="2024-07-06 21:58:37",modified="2024-07-07 17:31:19",revision=493]]
+--[[pod_format="raw",created="2024-07-06 21:58:37",modified="2024-07-08 00:16:02",revision=494]]
 --[[
 	contains functions for the map
 ]]
@@ -27,9 +27,10 @@ function init_map(tile_width, tile_height)
 		Wall:new(Vec:new(-128, -32), Vec:new(-128, 0)),
 		Wall:new(Vec:new(-128, 0), Vec:new(128, 0)),
 		Wall:new(Vec:new(128, 0), Vec:new(128, -48)),
-		Wall:new((128, -48), Vec:new(0, -48)),
-		Wall:new(Vec:new(0, -48), Vec:new(0, -32)),
+		Wall:new(Vec:new(128, -48), Vec:new(0, -48)),
+		Wall:new(Vec:new(0, -48), Vec:new(0, -32))
 	}
+
 	local start = Room:new(-1, Vec:new(128, 255), walls)
 	map:add(start, {})
 
