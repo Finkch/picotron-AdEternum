@@ -50,7 +50,7 @@ function Room:draw()
 		line(
 			self.walls[i].p0.x, self.walls[i].p0.y,
 			self.walls[i].p1.x, self.walls[i].p1.y,
-			8
+			21
 		)
 	end
 end
