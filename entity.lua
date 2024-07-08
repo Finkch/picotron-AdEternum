@@ -29,16 +29,15 @@ function Entity:new(sprite, health, mass, width, height, appendages, step)
     }
     setmetatable(e, Entity)
 
-	-- sets appendages' owner
-	for appendage in all(appendages) do
-		appendage.body = e
-	end
-
     return e
 end
 
 -- draws the entity
 function Entity:draw()
+	for a in all(self.appendages) do
+		a:update()
+	end
+
     spr(self.sprite, self.pos.x, self.pos.y, self.left, false)
 
 	for appendage in all(self.appendages) do
