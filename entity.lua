@@ -40,10 +40,10 @@ end
 -- gets bounding box
 function Entity:bounding()
 	return {
-		entity.pos,                                         -- top left
-		entity.pos + Vec:new(entity.width, 0),              -- top right
-		entity.pos + Vec:new(entity.width, entity.height),  -- bottom right
-		entity.pos + Vec:new(0, entity.height)              -- bottom left
+		self.pos,                                         -- top left
+		self.pos + Vec:new(self.width, 0),              -- top right
+		self.pos + Vec:new(self.width, self.height),  -- bottom right
+		self.pos + Vec:new(0, self.height)              -- bottom left
 	}
 end
 
