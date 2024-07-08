@@ -23,13 +23,14 @@ function init_map(tile_width, tile_height)
 
 	-- creats some rooms
 	-- just one, for now
-	local segments = {
-		{Vec:new(-128, 0), Vec:new(128, 0)},
-		{Vec:new(128, 0), Vec:new(128, -48)},
-		{Vec:new(128, -48), Vec:new(0, -48)},
-		{Vec:new(0, -48), Vec:new(0, -32)},
+	local walls = {
+		Wall:new(Vec:new(-128, -32), Vec:new(-128, 0)),
+		Wall:new(Vec:new(-128, 0), Vec:new(128, 0)),
+		Wall:new(Vec:new(128, 0), Vec:new(128, -48)),
+		Wall:new((128, -48), Vec:new(0, -48)),
+		Wall:new(Vec:new(0, -48), Vec:new(0, -32)),
 	}
-	local start = Room:new(-1, Vec:new(128, 255), segments)
+	local start = Room:new(-1, Vec:new(128, 255), walls)
 	map:add(start, {})
 
 	return map
