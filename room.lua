@@ -204,8 +204,8 @@ function Wall:mtv(bounding, intersections, count) -- finds minimum translation v
 	if (count > 1) then
 
 		if (intersections[2] or intersections[4]) then	-- floor/cieling
-			local dup = self.p0.y - bounding[1].y + 1
-			local ddown = self.p0.y - bounding[3].y - 1
+			local dup = self.p0.y - bounding[1].y 
+			local ddown = self.p0.y - bounding[3].y
 			
 			if (abs(dup) > abs(ddown)) then
 				tv = Vec:new(0, ddown)
