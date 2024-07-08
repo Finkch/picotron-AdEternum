@@ -207,10 +207,10 @@ function Wall:mtv(bounding, intersections, count) -- finds minimum translation v
 			local ddown = self.p0.y - bounding[3].y
 			
 			if (abs(dup) > abs(ddown)) then
-				tv = ddown
+				tv = Vec:new(ddown, 0)
 				dir = 3
 			else
-				tv = dup
+				tv = Vec:new(dup, 0)
 				dir = 1
 			end
 			
@@ -220,10 +220,10 @@ function Wall:mtv(bounding, intersections, count) -- finds minimum translation v
 			local dright = self.p0.x - bounding[1].x
 
 			if (abs(dleft) > abs(dright)) then
-				tv = dright
+				tv = Vec:new(0, dright)
 				dir = 2
 			else
-				tv = dleft
+				tv = Vec:new(0, dleft)
 				dir = 4
 			end
 		end
@@ -234,6 +234,8 @@ function Wall:mtv(bounding, intersections, count) -- finds minimum translation v
 		mtv = Vec:new(-1, -1) -- bogus values
 		dir = -1
 	end
+
+	debug:add("collision (" .. dir .. "):\t" .. to_string(tv))
 
 	return tv, dir
 end
