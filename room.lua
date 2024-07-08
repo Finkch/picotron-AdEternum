@@ -90,7 +90,7 @@ function Room:__tostring()
 	--tbl["Room " .. self.id .. ":"] = self.entities
 	
 	--return to_string(tbl)
-	return "Room " .. self.id .. ":\t" .. to_string(self.pos, 1)
+	return "Room " .. self.id .. ":\t" .. tstr(self.pos, 1)
 end
 
 -- collision
@@ -232,11 +232,12 @@ function Wall:mtv(bounding, intersections, count) -- finds minimum translation v
 	-- if one count, push towards smallest distance
 	else
 		-- do nothing :^(
-		mtv = Vec:new(-1, -1) -- bogus values
+		tv = Vec:new(0, 0) -- bogus values
 		dir = -1
 	end
 
-	debug:add("collision (" .. dir .. "):\t" .. to_string(tv))
+	debug:add(tstr(intersections))
+	debug:add("collision (" .. dir .. ", #" .. count .. "):\t" .. tstr(tv))
 
 	return tv, dir
 end

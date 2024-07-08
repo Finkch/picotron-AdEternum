@@ -43,7 +43,7 @@ function Q:__tostring()
     local str = ""
     
     for i = 1, #self do
-        str ..= to_string(self[i]) .. "\n"
+        str ..= tstr(self[i]) .. "\n"
     end
 
     return str
