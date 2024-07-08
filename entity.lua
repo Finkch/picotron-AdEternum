@@ -20,7 +20,7 @@ function Entity:new(sprite, health, mass, width, height, appendages, step)
         mass = mass,
         width = width,
         height = height,
-		centre = (width + height) / 2,
+		centre = Vec:new(width, height) / 2,
 		appendages = appendages,
         steps = step,	-- how many steps to take for one move
         pos = Vec:new(), vel = Vec:new(), acc = Vec:new(),
