@@ -25,12 +25,12 @@ function Timer:new(max_length)
 end
 
 -- timing functions
-function Timer:start()
+function Timer:st()
     if (#self.s >= self.max) deli(self.s, self.max)
     add(self.s, t(), 1)
 end
 
-function Timer:end()
+function Timer:en() -- sorry for bad names, but "end" is restricted
     if (#self.e >= self.max) deli(self.q, self.max)
     add(self.e, t(), 1)
     self:diff()
