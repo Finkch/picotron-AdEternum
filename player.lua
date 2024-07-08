@@ -34,9 +34,11 @@ function Player:draw()
 
 	-- places the target on a circle about the player.
 	-- this ensures the spread of their hands is more consistent
+	local tocentre = self.pos + self.centre
 	local length = 10
-	local point = target - self.pos + self.centre
-	local target = point:normal() * length + self.pos + self.centre
+	local point = target - tocentre
+	local target = point:normal() * length + tocentre
+	
 
 	-- sets the target
 	for appendage in all(self.appendages) do
