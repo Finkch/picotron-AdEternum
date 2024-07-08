@@ -5,6 +5,7 @@
 
 Vec = {}
 Vec.__index = Vec
+Vec.__type = "vec"
 
 
 -- constructor
