@@ -15,7 +15,7 @@ function Entity:new(sprite, health, mass, width, height, appendages, step)
 
 	-- sets appendages' owner
 	for appendage in all(appendages) do
-		appendage:body(self)
+		appendage.body = self
 	end
 
 	step = step or 4
