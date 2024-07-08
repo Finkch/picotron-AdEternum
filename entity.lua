@@ -10,13 +10,14 @@ Entity.__type = "entity"
 
 
 -- constructor
-function Entity:new(sprite, machine, health, mass, width, height, step)
+function Entity:new(machine, health, mass, width, height, step)
 	step = step or 4
     local e = {
 		id = nil,
-        sprite = sprite, left = false,
+		sprite = nil,
+        left = false,
 		machine = machine,
-		state = machine.current,
+		state = false,	-- can't act without a state
         max_health = health, health = health,
         mass = mass,
         width = width,
@@ -25,7 +26,6 @@ function Entity:new(sprite, machine, health, mass, width, height, step)
         steps = step,	-- how many steps to take for one move
         pos = Vec:new(), vel = Vec:new(), acc = Vec:new(),
 		room = nil,
-        state = false, -- Can't act without a state
         alive = false
     }
     setmetatable(e, Entity)
@@ -45,7 +45,7 @@ end
 -- updates
 function Entity:update()
 	self.state = self.machine:update()
-	self.sprite = self.state.anim()
+	self.sprite = self.state:anim()
 end
 
 
@@ -65,7 +65,7 @@ function Entity:spawn(pos, id, room)
     self.pos = pos
 	self.id = id
 	self.room = room
-    self.state = "idle"
+    self.state = self.machine.states[1]
     self.alive = true
     return self
 end
