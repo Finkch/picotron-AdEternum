@@ -29,8 +29,7 @@ end
 function Player:draw()
 
 	-- gets the position of the player's cursor
-	local cx, cy = mouse()
-	local target = cam.pos + Vec:new(cx, cy)
+	local target = kbm.pos
 
 	-- places the target on a circle about the player.
 	-- this ensures the spread of their hands is more consistent
