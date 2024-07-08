@@ -12,12 +12,6 @@ Entity.__index = Entity
 
 -- constructor
 function Entity:new(sprite, health, mass, width, height, appendages, step)
-
-	-- sets appendages' owner
-	for appendage in all(appendages) do
-		appendage.body = self
-	end
-
 	step = step or 4
     local e = {
 		id = nil,
@@ -34,6 +28,12 @@ function Entity:new(sprite, health, mass, width, height, appendages, step)
         alive = false
     }
     setmetatable(e, Entity)
+
+	-- sets appendages' owner
+	for appendage in all(appendages) do
+		appendage.body = e
+	end
+
     return e
 end
 
