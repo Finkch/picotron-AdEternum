@@ -1,4 +1,4 @@
---[[pod_format="raw",created="2024-07-06 20:07:26",modified="2024-07-06 22:14:07",revision=232]]
+--[[pod_format="raw",created="2024-07-06 20:07:26",modified="2024-07-07 02:28:31",revision=599]]
 
 
 -- a simple queue-like class
@@ -30,10 +30,11 @@ function Q:clear()
     self.data = {}
 end
 
-function Q:print(x, y) -- also clears self!
+function Q:print(x, y, col) -- also clears self!
+    col = col or 5
     x = x or 0
     y = y or 0
-    print(tostr(self), x, y)
+    print(tostr(self), x, y, col)
     self:clear()
 end
 
