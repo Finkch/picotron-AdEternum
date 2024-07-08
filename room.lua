@@ -125,7 +125,7 @@ end
 
 
 -- collision detection
-function Wall:intersects(q0, q1)
+function Wall:intersects(q0, q1) -- intersects a line
 
 	-- finds the orientation of the order triples (p, q, r)
 	local function orientation(p, q, r)
@@ -161,19 +161,64 @@ function Wall:intersects(q0, q1)
 	return false
 end
 
-function Wall:collides(bounding)
+function Wall:collides(entity, bounding) -- collides with a bounding box
 	
 	local intersection = false
 
 	local intersections = {}
+	local count = 0
 	for j = 1, #bounding do
 		add(intersections, intersect(bounding[j], bounding[j % 4 + 1]))
-		if (intersections[j]) intersection = true
+		if (intersections[j]) count += 1
 	end
 
-	-- if there's an intersection
-	if (intersection) return true
+	-- if there's an intersection, finds minimum translation vector.
+	if (count > 0) return true, mtv(bounding, intersections)
 
     -- otherwise, there is no collision
     return false
+end
+
+function Wall:mtv(entity, bounding, intersections, count) -- finds minimum translation vector
+
+	-- this implementation only works for walls orthogonal to axis
+
+	local tv = nil
+	local dir = nil
+
+	-- if two counts of collision, push normal to wall
+	if (counts > 1) then
+
+		if (intersections[2] or intersections[4]) then	-- floor/cieling
+			local dup = self.p0.y - bounding[1].y
+			local ddown = self.p0.y - bounding[3].y
+			
+			if (abs(dup) > abs(ddown)) then
+				tv = ddown
+				dir = 3
+			else
+				tv = dup
+				dir = 1
+			end
+			
+		else						-- wall
+
+			local dleft = self.p0.x - bounding[3].x
+			local dright = self.p0.x - bounding[1].x
+
+			if (abs(dleft) > abs(dright)) then
+				tv = dright
+				dir = 2
+			else
+				tv = dleft
+				dir = 4
+			end
+		end
+
+	-- if one count, push towards smallest distance
+	else
+		-- do nothing :^(
+	end
+
+	return tv, dir
 end
