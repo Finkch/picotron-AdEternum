@@ -1,28 +1,30 @@
---[[pod_format="raw",created="2024-07-01 18:29:29",modified="2024-07-06 23:43:58",revision=1159]]
+--[[pod_format="raw",created="2024-07-01 18:29:29",modified="2024-07-07 17:36:01",revision=1215]]
 
 -- includes finkclib
 rm("/ram/cart/finkchlib") -- makes sure at most one copy is present
 mount("/ram/cart/finkchlib", "/ram/finkchlib")
 
-include("finkchlib/log.lua")
 include("player.lua")
 include("lib/keys.lua")
 include("lib/queue.lua")
 include("lib/clock.lua")
 include("map.lua")
 
+include("finkchlib/log.lua")
+include("finkchlib/tstr.lua")
 
 function _init()
 
 	-- creates the player
 	player = Player:new(0, 3, 1)
-	player:spawn(32, -32)
 
 	-- creates the keyboard
-	init_keys({"w", "a", "s", "d", "e"})
-	
+	init_keys({"w", "a", "s", "d", "e", "space"})
+
 	-- tracks map data
-	init_map(16, 16)
+	world = init_map(16, 16)
+
+	world.rooms[-1]:spawn(player, -1, Vec:new(0, 0))
 
 	-- message queue for debug printouts
 	debug = Q:new()
@@ -42,14 +44,18 @@ function _update()
 	if (keys:held("s")) player:accelerate(Vec:new(0, 0.25))
 
 	-- adds gravity
-	player.acc.y += 0.11
+	--player.acc.y += 0.11
 
 	-- applies friction
+	--[[
 	if (player:grounded()) then
 		player.vel /= 1.3
 	else
 		player.vel /= 1.025
 	end
+	]]
+
+	player.vel /= 1.2
 
 	player:move()
 	
@@ -58,7 +64,6 @@ function _update()
 	
 	debug:add(tostr(clock))
 	debug:add(tostr(player.pos))
-	debug:add(tostr(player:grounded()))
 end
 
 function _draw()
@@ -67,8 +72,19 @@ function _draw()
 	camera(player.pos.x - 240 + player.width, player.pos.y - 135 + player.height)	
 
 	map(0, 0, 0, 0, 128, 32)
+
+	world:draw()
 	player:draw()
 	
 	camera()
+
 	debug:print()
+
+	-- prints colours out
+	for i = 0, 270 do
+		pset(479, i, i // 8)
+		if (i % 8 == 0) then
+			print(i // 8, 460, i)
+		end
+	end
 end
