@@ -138,9 +138,9 @@ function Entity:step(nv)
 	]]
 
 	-- only one step for now
-	col, mtv, dir = self:collided(np)
+	col, mtv, dir = self:collided(nv)
 	if (col) then
-
+		np += mtv
 	end
 	
 	self.pos = np
@@ -161,8 +161,6 @@ end
 
 
 -- checks for collisions
-function Entity:collided(pos)
-	pos = pos or self.pos
-
-	return self.room:collides(self)
+function Entity:collided(vel)
+	return self.room:collides(self:bounding(vel))
 end
