@@ -46,7 +46,7 @@ end
 -- for now, just its bounding box
 function Room:draw()
 
-	for i = 1, #self.segments do
+	for i = 1, #self.walls do
 		line(
 			self.walls[i].p0.x, self.walls[i].p0.y,
 			self.walls[i].p1.x, self.walls[i].p1.y,
