@@ -3,6 +3,7 @@
 
 ]]
 
+include("lib/vec.lua")
 include("finkchlib/ttype.lua")
 
 Camera = {}
@@ -10,7 +11,7 @@ Camera.__index = Camera
 
 -- constructor
 function Camera:new()
-    local c = {x = 0, y = 0}
+    local c = {pos = Vec:new()}
     setmetatable(c, Camera)
     return c
 end
