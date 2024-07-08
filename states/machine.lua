@@ -5,7 +5,7 @@
 
 Machine = {}
 Machine.__index = Machine
-Machine.__type = "statemachine"
+Machine.__type = "machine"
 
 function Machine:new()
     local m = {
