@@ -7,9 +7,10 @@ State = {}
 State.__index = State
 State.__type = "state"
 
-function State:new()
+function State:new(name, animation)
     local s = {
-        
+        name = name,
+        animation = animation
     }
 
     setmetatable(s, State)
