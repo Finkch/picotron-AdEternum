@@ -13,7 +13,7 @@ function Machine:new(states)
         current = states[1]     -- current state
     }
 
-    setmetatable(sm, Machine)
+    setmetatable(m, Machine)
     return m
 end
 
