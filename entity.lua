@@ -3,7 +3,6 @@
 -- represents an entity
 
 include("lib/vec.lua")
-include("collision.lua")
 
 include("finkchlib/log.lua")
 
