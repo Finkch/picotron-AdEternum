@@ -14,7 +14,7 @@ function Logger:new(directory, file, append)
         dir = directory,
         file = file,
         append = append,
-        first_write = true
+        writes = {}
     }
 
     setmetatable(l, Logger)
@@ -22,14 +22,23 @@ function Logger:new(directory, file, append)
 end
 
 function Logger:__call(contents, file, append)
+    
+    -- gets defaults
     file = file or self.file
     append = append or self.append
-    local args = {}
 
+    -- checks if this file has been written to so far this execution
+    local first_write = false
+    if (not self.writes[file]) then
+        self.writes[file] = true
+        first_write = true
+    end
+
+    -- builds arguments
+    local args = {}
     if (append and not first_write) add(args, "-a") -- clears file on first write
     if (self.dir) add(args, "-d " .. self.dir)
 
+    -- logs
     log(file, contents, args)
-
-    first_write = false
 end
