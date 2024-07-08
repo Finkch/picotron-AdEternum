@@ -236,8 +236,5 @@ function Wall:mtv(bounding, intersections, count) -- finds minimum translation v
 		dir = -1
 	end
 
-	debug:add(tstr(intersections))
-	debug:add("collision (" .. dir .. ", #" .. count .. "):\t" .. tstr(tv))
-
 	return tv, dir
 end
