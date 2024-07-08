@@ -7,8 +7,9 @@ Animation = {}
 Animation.__index = Animation
 Animation.__type = "animation"
 
-function Animation:new(sprites, dur)
+function Animation:new(name, sprites, dur)
     local a = {
+        name = name,
         sprites = sprites,
         dur = dur,
         frame = 0
