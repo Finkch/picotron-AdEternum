@@ -29,6 +29,6 @@ function Appendage:draw()
     local appendage = totarget:normal() * self.length + tojoint
 
     -- for now, just draws a red line for the appendage
-    line(tojoint.x, tojoint.y, appendage.x, appendage.y)
+    line(tojoint.x, tojoint.y, appendage.x, appendage.y, 8)
 end
 
