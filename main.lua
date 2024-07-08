@@ -30,7 +30,7 @@ function _init()
 	player = Player:new(0, 3, 1)
 
 	-- creates the keyboard
-	init_keys({"w", "a", "s", "d", "e", "space", "`"})
+	init_keys({"lmb", "rmb", "w", "a", "s", "d", "e", "space", "`"})
 
 	-- tracks map data
 	world = init_map(16, 16)
