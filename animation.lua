@@ -1,3 +1,4 @@
+--[[pod_format="raw",created="2024-07-08 23:52:16",modified="2024-07-08 23:56:35",revision=10]]
 --[[
     handles animations
 
@@ -24,7 +25,7 @@ end
 
 -- other
 function Animation:get() -- gets current sprite
-    return self.sprites[self.frames // self.dur + 1]
+    return self.sprites[self.frame // self.dur + 1]
 end
 
 
