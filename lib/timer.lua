@@ -17,7 +17,8 @@ function Timer:new(max_length)
         best = nil,
         worst = nil,
         average = nil,
-        max = max_length
+        max = max_length,
+        start = true,
     }
 
     setmetatable(t, Timer)
@@ -59,6 +60,17 @@ function Timer:update() -- updates best, worst, and average values
 end
 
 -- metamethods
+function Timer:__call() -- calling timer invokes appropriate of start(), end()
+    if (self.start) then
+        self:st()
+    else
+        self:en()
+    end
+
+    -- toggles which one to call
+    self.start != self.start
+end
+
 function Timer:__len()
     return #self.d
 end
