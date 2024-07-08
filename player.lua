@@ -15,12 +15,20 @@ setmetatable(Player, Entity)
 function Player:new(health)
 
 	-- arms the player
-	local appendages = {
-		Appendage:new(Vec:new(3, 11), 10, nil),
-		Appendage:new(Vec:new(8, 11), 10, nil)
-	}
+	local larm 		= Appendage:new(Vec:new(3, 11), 5)
+	local lforearm 	= Appendage:new(Vec:new(0, 0), 5)
+	larm:setchild(lforearm)
+	
+	local rarm 		= Appendage:new(Vec:new(8, 11), 5)
+	local rforearm  = Appendage:new(Vec:new(0, 0), 5)
+	rarm:setchild(rforearm)
+
+	local appendages = {larm, rarm, lforearm, rforearm}
 
 	local player = Entity.new(self, 2, health, 1, 12, 27, appendages)
+
+	larm.parent = player
+	rarm.parent = player
 
 	setmetatable(player, Player)
 	return player
