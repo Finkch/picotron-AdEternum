@@ -3,6 +3,8 @@
 
 ]]
 
+include("finkchlib/tstr.lua")
+
 Animation = {}
 Animation.__index = Animation
 Animation.__type = "animation"
@@ -36,4 +38,25 @@ function Animation:__call() -- calling animation increments frame and returns sp
     if (self.frame > #self.sprites * self.dur) self.frame = 0
 
     return sprite
+end
+
+function Animation:__tostring()
+
+    -- gets a list of sprite orders
+    local sprs = ""
+    for i = 1, #self.sprites do
+        sprs ..= self.sprite.sprite .. " "
+
+        if (i != #self.sprites) sprs ..= "-> "
+    end
+
+    -- creates table that will be conterted to a string
+    local tbl = {}
+    tbl[self.name] = {
+        self.f .. " / " .. self.dur * #self.sprites,
+        sprs,
+        seld.dur
+    }
+
+    return tstr(tbl)
 end
