@@ -55,4 +55,11 @@ function Player:input()
 	if (kbm:held("w")) player:accelerate(Vec:new(0, -0.25))
 	if (kbm:held("s")) player:accelerate(Vec:new(0, 0.25))
 	if (kbm:pressed("`")) debug_visuals = not debug_visuals
+
+	-- checks which direction the player is facing
+	if (kbm:held("d") and self.acc.x > 0) then
+		self.left = false
+	elseif (kbm:held("a") and self.acc.x < 0) then
+		self.left = true
+	end
 end
