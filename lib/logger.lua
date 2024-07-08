@@ -9,10 +9,10 @@ Logger = {}
 Logger.__index = Logger
 Logger.__type = "logger"
 
-function Logger:new(file, directory, append)
+function Logger:new(directory, file, append)
     local l = {
-        file = file,
         dir = directory,
+        file = file,
         append = append,
         first_write = true
     }
@@ -21,7 +21,7 @@ function Logger:new(file, directory, append)
     return l
 end
 
-function Logger:__call(contents)
+function Logger:__call(contents, file)
     file = file or self.file
     local args = {}
 
