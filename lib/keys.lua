@@ -4,12 +4,12 @@
 
 include("lib/vec.lua")
 
-Keys = {}
-Keys.__index = Keys
+KBM = {}
+KBM.__index = KBM
 
 
 -- a class to track keyboard state
-function Keys:new(buttons)
+function KBM:new(buttons)
 
     local k = {
         spos = Vec:new(), -- screen coordinates
@@ -28,13 +28,13 @@ function Keys:new(buttons)
         }
     end
 
-    setmetatable(k, Keys)
+    setmetatable(k, KBM)
     return k
 end
 
 
 -- checks status of each key being tracked
-function Keys:update()
+function KBM:update()
 
     -- gets mouse state
     local cx, cy, mb = mouse()
@@ -83,22 +83,22 @@ function Keys:update()
 end
 
 -- functions to easily check status of a key
-function Keys:down(key)
+function KBM:down(key)
     return self.keys[key].down
 end
 
-function Keys:up(key)
+function KBM:up(key)
     return self.keys[key].up
 end
 
-function Keys:held(key)
+function KBM:held(key)
     return self.keys[key].held
 end
 
-function Keys:pressed(key)
+function KBM:pressed(key)
     return self.keys[key].pressed
 end
 
-function Keys:released(key)
+function KBM:released(key)
     return self.keys[key].released
 end
