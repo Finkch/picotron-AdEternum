@@ -73,6 +73,22 @@ function Vec:__pow(other) -- cross product! points towards z
 end
 
 
+-- other metamethods
+function Vec:__flr()
+    return Vec:new(
+        flr(self.x),
+        flr(self.y)
+    )
+end
+
+function Vec:__ceil()
+    return Vec:new(
+        ceil(self.x),
+        ceil(self.y)
+    )
+end
+
+
 -- comparison operators
 function Vec:__eq(other)
     return self.x == other.x and self.y == other.y
