@@ -54,7 +54,7 @@ function Timer:update() -- updates best, worst, and average values
     -- gets average
     local average = 0
     for i = 1, #self do
-        average += self.diff[i]
+        average += self.d[i]
     end
     self.average = average / #self
 end
@@ -68,7 +68,7 @@ function Timer:__call() -- calling timer invokes appropriate of start(), end()
     end
 
     -- toggles which one to call
-    self.start != self.start
+    self.start = not self.start
 end
 
 function Timer:__len()
@@ -76,14 +76,13 @@ function Timer:__len()
 end
 
 function Timer:__tostring()
-    local out = {
-        "diff" = self.d[1]
-        "start" = self.s[1],
-        "end" = self.e[1],
-        "best" = self.best,
-        "worst" = self.worst,
-        "average" = self.average
-    }
+    local out = {}
+    out["diff"]     = self.d[1]
+    out["start"]    = self.s[1]
+    out["end"]      = self.e[1]
+    out["best"]     = self.best
+    out["worst"]    = self.worst
+    out["average"]  = self.average
 
     return tstr(out)
 end
