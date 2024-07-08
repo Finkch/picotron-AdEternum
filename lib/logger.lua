@@ -10,11 +10,12 @@ Logger.__index = Logger
 Logger.__type = "logger"
 
 function Logger:new(directory, file, append)
+    if (not append) append = true
     local l = {
         dir = directory,
         file = file,
         append = append,
-        writes = {}
+        writes = {}         -- tracks which files have been written to
     }
 
     setmetatable(l, Logger)
