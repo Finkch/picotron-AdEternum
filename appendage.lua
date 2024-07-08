@@ -55,11 +55,9 @@ end
 function Appendage:setparent(appendage)
     self.parent = appendage
     appendage.child = self
-    self.joint = appendage.tip
 end
 
 function Appendage:setchild(appendage)
     self.child = appendage
     appendage.parent = self
-    appendage.joint = self.tip
 end
