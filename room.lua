@@ -10,8 +10,6 @@
 include("finkchlib/tstr.lua")
 include("entity.lua")
 
-include("finkchlib/log.lua")
-
 Room = {}
 Room.__index = Room
 

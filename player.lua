@@ -6,7 +6,6 @@
 include("entity.lua")
 include("appendage.lua")
 
-include("finkchlib/log.lua")
 include("finkchlib/tstr.lua")
 
 Player = {}
