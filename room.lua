@@ -125,7 +125,7 @@ function Wall:new(p0, p1, n)
 		normal = n
 	}
 	setmetatable(w, Wall)
-	return wall
+	return w
 end
 
 -- updates a wall's true position
