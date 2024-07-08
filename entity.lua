@@ -38,12 +38,13 @@ function Entity:draw()
 end
 
 -- gets bounding box
-function Entity:bounding()
+function Entity:bounding(offset)
+	offset = offset or Vec:new(0, 0)
 	return {
-		self.pos,                                         -- top left
-		self.pos + Vec:new(self.width, 0),              -- top right
-		self.pos + Vec:new(self.width, self.height),  -- bottom right
-		self.pos + Vec:new(0, self.height)              -- bottom left
+		self.pos + offset,                                     -- top left
+		self.pos + Vec:new(self.width, 0) + offset,            -- top right
+		self.pos + Vec:new(self.width, self.height) + offset,  -- bottom right
+		self.pos + Vec:new(0, self.height) + offset            -- bottom left
 	}
 end
 
@@ -139,7 +140,7 @@ function Entity:step(nv)
 	-- only one step for now
 	col, mtv, dir = self:collided(np)
 	if (col) then
-		
+
 	end
 	
 	self.pos = np
@@ -162,8 +163,6 @@ end
 -- checks for collisions
 function Entity:collided(pos)
 	pos = pos or self.pos
-	local col, mtv, dir = self.room:collides(self)
 
-	if (col) debug:add("collision (" .. dir .. "):\t" .. to_string(mtv))
-	return col, mtv, dir
+	return self.room:collides(self)
 end
