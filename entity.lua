@@ -10,7 +10,7 @@ Entity.__type = "entity"
 
 
 -- constructor
-function Entity:new(sprite, health, mass, width, height, appendages, step)
+function Entity:new(sprite, health, mass, width, height, step)
 	step = step or 4
     local e = {
 		id = nil,
@@ -20,7 +20,6 @@ function Entity:new(sprite, health, mass, width, height, appendages, step)
         width = width,
         height = height,
 		centre = Vec:new(width, height) / 2,
-		appendages = appendages,
         steps = step,	-- how many steps to take for one move
         pos = Vec:new(), vel = Vec:new(), acc = Vec:new(),
 		room = nil,
@@ -37,20 +36,12 @@ function Entity:draw()
 
     spr(self.sprite, self.pos.x, self.pos.y, self.left, false)
 
-	for appendage in all(self.appendages) do
-		appendage:draw()
-	end
-
 	if (debug_visuals) rect(self.pos.x, self.pos.y, self.pos.x + self.width, self.pos.y + self.height, 18)
 end
 
 
 -- updates
-function Entity:update()
-	for a in all(self.appendages) do
-		a:update()
-	end
-end
+
 
 -- gets bounding box
 function Entity:bounding(offset)
