@@ -231,6 +231,8 @@ function Wall:mtv(bounding, intersections, count) -- finds minimum translation v
 	-- if one count, push towards smallest distance
 	else
 		-- do nothing :^(
+		mtv = Vec:new(-1, -1) -- bogus values
+		dir = -1
 	end
 
 	return tv, dir
