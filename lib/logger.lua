@@ -28,6 +28,8 @@ function Logger:__call(contents, file, append)
     file = file or self.file
     append = append or self.append
 
+    if (not file) error("logger has no file")
+
     -- checks if this file has been written to so far this execution
     local first_write = false
     if (not self.writes[file]) then
