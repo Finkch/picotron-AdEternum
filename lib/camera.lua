@@ -4,7 +4,10 @@
 ]]
 
 include("lib/vec.lua")
+
+include("finkchlib/tstr.lua")
 include("finkchlib/ttype.lua")
+include("finkchlib/tmath.lua")
 
 Camera = {}
 Camera.__index = Camera
@@ -20,8 +23,13 @@ end
 -- camera methods
 
 -- focuses the camera to a point
-function Camera:focus(pos)
-    self.pos = pos - Vec:new(240, 135)
+function Camera:focus(focal)
+
+    -- converts entity to a vector to the centre of its sprite.
+    -- take floor of centre to prevent half-pixel jitters.
+    if (ttype(focal) == "entity") focal = focal.pos + tflr(focal.centre)
+
+    self.pos = focal - Vec:new(240, 135)
 end
 
 
