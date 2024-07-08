@@ -65,10 +65,12 @@ end
 
 function Timer:__tostring()
     local out = {
-        q = self.s[1],
-        best = self.best,
-        worst = self.worst,
-        average = self.average
+        "diff" = self.d[1]
+        "start" = self.s[1],
+        "end" = self.e[1],
+        "best" = self.best,
+        "worst" = self.worst,
+        "average" = self.average
     }
 
     return tstr(out)
