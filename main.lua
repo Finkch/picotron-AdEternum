@@ -19,7 +19,7 @@ function _init()
 	player = Player:new(0, 3, 1)
 
 	-- creates the keyboard
-	init_keys({"w", "a", "s", "d", "e", "space"})
+	init_keys({"w", "a", "s", "d", "e", "space", "`"})
 
 	-- tracks map data
 	world = init_map(16, 16)
@@ -48,6 +48,7 @@ function _update()
 	if (keys:held("d")) player:accelerate(Vec:new(0.25, 0))
 	if (keys:held("w")) player:accelerate(Vec:new(0, -0.25))
 	if (keys:held("s")) player:accelerate(Vec:new(0, 0.25))
+	if (keys:pressed("`")) debug_visuals = not debug_visuals
 
 	-- adds gravity
 	player.acc.y += 0.11
