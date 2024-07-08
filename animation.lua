@@ -10,7 +10,8 @@ Animation.__type = "animation"
 function Animation:new(sprites, dur)
     local a = {
         sprites = sprites,
-        dur = dur
+        dur = dur,
+        frame = 0
     }
 
     setmetatable(a, Animation)
