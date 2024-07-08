@@ -21,7 +21,7 @@ end
 
 -- focuses the camera to a point
 function Camera:focus(pos)
-    self.pos = pos
+    self.pos = pos - Vec:new(240, 135)
 end
 
 
@@ -33,6 +33,6 @@ function Camera:__call(reset)
     if (reset) then
         camera()
     else
-        camera(self.pos.x - 240, self.pos.y - 135)
+        camera(self.pos.x, self.pos.y)
     end
 end
