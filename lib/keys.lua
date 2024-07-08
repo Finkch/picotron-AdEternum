@@ -60,7 +60,7 @@ function Keys:update()
         if (k == "lmb") then
             kd = mb & 0b1 != 0
         elseif (k == "rmb") then
-            kd = mb & 0b1 != 0
+            kd = mb & 0b2 != 0
         else
             kd = key(k)
         end
