@@ -16,12 +16,23 @@ function Camera:new()
     return c
 end
 
+
+-- camera methods
+
+-- focuses the camera to a point
+function Camera:focus(pos)
+    self.pos = pos
+end
+
+
+
 -- metamethods
-function Camera:__call(x, y)
-    if (ttype(x) == "vec") x, y = x.x, x.y
-    if (not x) then
+
+-- calling a camera moves camera there
+function Camera:__call(reset)
+    if (reset) then
         camera()
     else
-        camera(x - 240, y - 135)
+        camera(self.pos.x - 240, self.pos.y - 135)
     end
-end 
+end
