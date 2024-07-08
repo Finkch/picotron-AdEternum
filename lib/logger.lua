@@ -21,11 +21,12 @@ function Logger:new(directory, file, append)
     return l
 end
 
-function Logger:__call(contents, file)
+function Logger:__call(contents, file, append)
     file = file or self.file
+    append = append or self.append
     local args = {}
 
-    if (self.append and not first_write) add(args, "-a") -- clears file on first write
+    if (append and not first_write) add(args, "-a") -- clears file on first write
     if (self.dir) add(args, "-d " .. self.dir)
 
     log(file, contents, args)
