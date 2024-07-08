@@ -34,9 +34,6 @@ end
 
 -- draws the entity
 function Entity:draw()
-	for a in all(self.appendages) do
-		a:update()
-	end
 
     spr(self.sprite, self.pos.x, self.pos.y, self.left, false)
 
@@ -45,6 +42,14 @@ function Entity:draw()
 	end
 
 	if (debug_visuals) rect(self.pos.x, self.pos.y, self.pos.x + self.width, self.pos.y + self.height, 18)
+end
+
+
+-- updates
+function Entity:update()
+	for a in all(self.appendages) do
+		a:update()
+	end
 end
 
 -- gets bounding box
