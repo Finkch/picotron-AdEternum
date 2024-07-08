@@ -97,6 +97,11 @@ function _draw()
 		debug:clear()
 	end
 
+	if (debug_visuals) then
+		line(0, 135, 240, 135, 8)
+		line(240, 0, 240, 135, 8)
+	end
+
 	-- prints colours out
 	for i = 0, 270 do
 		pset(479, i, i // 8)
