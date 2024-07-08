@@ -10,11 +10,13 @@ Entity.__type = "entity"
 
 
 -- constructor
-function Entity:new(sprite, health, mass, width, height, step)
+function Entity:new(sprite, machine, health, mass, width, height, step)
 	step = step or 4
     local e = {
 		id = nil,
         sprite = sprite, left = false,
+		machine = machine,
+		state = machine.current,
         max_health = health, health = health,
         mass = mass,
         width = width,
@@ -41,6 +43,10 @@ end
 
 
 -- updates
+function Entity:update()
+	self.state = self.machine:update()
+	self.sprite = self.state.anim()
+end
 
 
 -- gets bounding box
