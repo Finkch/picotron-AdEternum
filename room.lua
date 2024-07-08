@@ -181,12 +181,12 @@ function Wall:collides(bounding) -- collides with a bounding box
 	local intersections = {}
 	local count = 0
 	for j = 1, #bounding do
-		add(intersections, intersect(bounding[j], bounding[j % 4 + 1]))
+		add(intersections, self:intersects(bounding[j], bounding[j % 4 + 1]))
 		if (intersections[j]) count += 1
 	end
 
 	-- if there's an intersection, finds minimum translation vector.
-	if (count > 0) return true, mtv(bounding, intersections, count)
+	if (count > 0) return true, self:mtv(bounding, intersections, count)
 
     -- otherwise, there is no collision
     return false
