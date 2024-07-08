@@ -8,14 +8,6 @@ Keys = {}
 Keys.__index = Keys
 
 
--- a globally accessable class representing the keyboard
-keys = {}
-
-function init_keys(buttons)
-    keys = Keys:new(buttons)
-end
-
-
 -- a class to track keyboard state
 function Keys:new(buttons)
 
