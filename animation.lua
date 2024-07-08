@@ -25,6 +25,7 @@ end
 -- other
 function Animation:get() -- gets current sprite
     return self.sprites[self.frames // self.dur + 1]
+end
 
 
 -- metamethods
