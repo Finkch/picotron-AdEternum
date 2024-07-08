@@ -58,9 +58,9 @@ function Keys:update()
         -- checks if the key is down
         local kd = nil
         if (k == "lmb") then
-            kb = mb & 0b1 != 0
+            kd = mb & 0b1 != 0
         elseif (k == "rmb") then
-            kb = mb & 0b1 != 0
+            kd = mb & 0b1 != 0
         else
             kd = key(k)
         end
