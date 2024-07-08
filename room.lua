@@ -94,9 +94,8 @@ function Room:__tostring()
 end
 
 -- collision
-function Room:collides(entity)
+function Room:collides(bounding)
 	local col = false
-	local bounding = entity:bounding()
 	local mtv = nil
 	local dir = nil
 
@@ -105,6 +104,8 @@ function Room:collides(entity)
 
 		if (col) return col, mtv, dir
 	end
+
+	return false
 end
 
 
@@ -199,7 +200,7 @@ function Wall:mtv(bounding, intersections, count) -- finds minimum translation v
 	local tv = nil
 	local dir = nil
 
-	-- if two counts of collision, push normal to wall
+	-- if two counts of collision, push minimum distance
 	if (count > 1) then
 
 		if (intersections[2] or intersections[4]) then	-- floor/cieling
