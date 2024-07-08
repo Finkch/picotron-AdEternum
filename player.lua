@@ -19,6 +19,12 @@ function Player:new(health)
 	return player
 end
 
+function Player:draw()
+	Entity.draw(self)
+
+	spr(3, self.pos.x, self.pos.y, self.left, false)
+end
+
 
 -- gets player input
 function Player:input()
