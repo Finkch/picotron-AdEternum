@@ -1,21 +1,30 @@
---[[pod_format="raw",created="2024-07-01 18:29:29",modified="2024-07-08 04:33:23",revision=1218]]
+--[[pod_format="raw",created="2024-07-01 18:29:29",modified="2024-07-08 18:31:31",revision=1221]]
 
 -- includes finkclib
 rm("/ram/cart/finkchlib") -- makes sure at most one copy is present
 mount("/ram/cart/finkchlib", "/ram/finkchlib")
 
-include("player.lua")
 include("lib/keys.lua")
 include("lib/queue.lua")
 include("lib/clock.lua")
 include("lib/camera.lua")
+include("lib/timer.lua")
+include("lib/logger.lua")
+include("player.lua")
 include("map.lua")
 
-include("finkchlib/log.lua")
 include("finkchlib/tstr.lua")
 include("finkchlib/ttype.lua")
 
 function _init()
+
+	-- could also have timers for _update and _draw(), but these are all
+	-- so fast they're registering 0s. Not enough granularity in time()...
+	local timer_init = Timer:new(2)
+	timer_init()
+
+	-- logger object
+	logger = Logger:new("appdata/AE/logs")
 
 	-- creates the player
 	player = Player:new(0, 3, 1)
@@ -42,6 +51,9 @@ function _init()
 
 	-- whether to debug printout
 	debug_print = true
+
+	timer_init()
+	logger("startup time:" .. tostr(timer_init), "times.txt")
 end
 
 function _update()
