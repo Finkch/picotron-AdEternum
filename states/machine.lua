@@ -3,6 +3,8 @@
 
 ]]
 
+include("finkchlib/ttype.lua")
+
 Machine = {}
 Machine.__index = Machine
 Machine.__type = "machine"
@@ -18,12 +20,12 @@ function Machine:new(states)
 end
 
 function Machine:update()
-    
+
     --      for now, do nothing
 
     -- checks if transition
 
     -- updates current
 
-    return current
+    return self.current
 end
