@@ -11,7 +11,9 @@ Timer.__type = "timer"
 
 function Timer:new(max_length)
     local t = {
-        q = {},
+        s = {}, -- start times
+        e = {}, -- end times
+        d = {}, -- differences
         best = nil,
         worst = nil,
         average = nil,
@@ -22,18 +24,27 @@ function Timer:new(max_length)
     return t
 end
 
--- misc
-function Timer:diff(i) -- gets the difference between the two most recent items
-    i = i or 1 -- defaults to first item
-    if (#self < i + 1) return
-
-    return self.q[i] - self.q[i + 1]
+-- timing functions
+function Timer:start()
+    if (#self.s >= self.max) deli(self.s, self.max)
+    add(self.s, t(), 1)
 end
 
-function Timer:update() -- updates best, worst, and average values
-    if (#self < 2) return
+function Timer:end()
+    if (#self.e >= self.max) deli(self.q, self.max)
+    add(self.e, t(), 1)
+    self:diff()
+    self:update()
+end
 
-    local diff = self:diff()
+function Timer:diff() -- gets the difference between the two most recent items
+    if (#self.d >= self.max) deli(self.d, self.max)
+    add(self.d, self.e[1] - self.s[1])
+end
+
+-- misc
+function Timer:update() -- updates best, worst, and average values
+    local diff = self.d[1]
 
     -- best and worst
     if (not self.best or diff < self.best) best = diff
@@ -41,26 +52,20 @@ function Timer:update() -- updates best, worst, and average values
 
     -- gets average
     local average = 0
-    for i = 1, #self - 1 do
-        average += self:diff(i)
+    for i = 1, #self do
+        average += self.diff[i]
     end
     self.average = average / #self
 end
 
 -- metamethods
-function Timer:__call() -- calling timer pushes time to the queue
-    if (#self >= self.max) deli(self.q, #self)
-    add(self.q, t(), 1)
-    self:update()
-end
-
 function Timer:__len()
-    return #self.q
+    return #self.d
 end
 
 function Timer:__tostring()
     local out = {
-        q = self.q[1],
+        q = self.s[1],
         best = self.best,
         worst = self.worst,
         average = self.average
