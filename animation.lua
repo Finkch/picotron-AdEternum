@@ -47,7 +47,7 @@ function Animation:__tostring()
     -- gets a list of sprite orders
     local sprs = ""
     for i = 1, #self.sprites do
-        sprs ..= self.sprite.sprite .. " "
+        sprs ..= tostr(self.sprites[i].sprite) .. " "
 
         if (i != #self.sprites) sprs ..= "-> "
     end
@@ -55,9 +55,9 @@ function Animation:__tostring()
     -- creates table that will be conterted to a string
     local tbl = {}
     tbl[self.name] = {
-        self.f .. " / " .. self.dur * #self.sprites,
+        self.frame .. " / " .. self.dur * #self.sprites,
         sprs,
-        seld.dur
+        self.dur
     }
 
     return tstr(tbl)
