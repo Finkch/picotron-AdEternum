@@ -78,12 +78,14 @@ function _update()
 	player.vel /= 1.2
 
 	player:move()
+	player:update()
 	
 	-- increments frame count
 	clock()
 	
 	debug:add(tostr(clock))
 	debug:add(tostr(player.pos))
+	debug:add("state:" .. tostr(player.state))
 end
 
 function _draw()
