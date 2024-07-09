@@ -17,3 +17,9 @@ function Sprite:new(sprite, mounts)
     setmetatable(s, Sprite)
     return s
 end
+
+
+-- metamethods
+function Sprite:__tostring()
+    return tostr(self.sprite)
+end

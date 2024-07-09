@@ -29,3 +29,9 @@ function Machine:update()
 
     return self.current
 end
+
+
+-- metamethods
+function Machine:__tostring()
+    return tostr(self.current)
+end

@@ -22,3 +22,9 @@ end
 function State:anim()
     return self.animation()
 end
+
+
+-- metamethods
+function State:__tostring()
+    return tostr(self.animation)
+end
