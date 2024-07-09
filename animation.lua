@@ -37,7 +37,7 @@ function Animation:__call() -- calling animation increments frame and returns sp
 
     -- increments frame count, reseting if necessary
     self.frame += 1
-    if (self.frame > #self.sprites * self.dur) self.frame = 0
+    if (self.frame >= #self.sprites * self.dur) self.frame = 0
 
     return sprite
 end
