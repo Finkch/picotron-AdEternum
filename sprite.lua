@@ -10,7 +10,7 @@ Sprite.__type = "sprite"
 function Sprite:new(sprite, mounts)
     mounts = mounts or {}
     local s = {
-        sprite = snum,
+        sprite = sprite,
         mounts = mounts
     }
 
