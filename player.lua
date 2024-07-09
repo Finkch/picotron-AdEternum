@@ -24,9 +24,15 @@ function Player:new(health)
 end
 
 function Player:draw()
+	
+	-- back sprites
+	spr(24, self.pos.x, self.pos.y, self.left, false)
 
 	-- main sprites
 	Entity.draw(self)
+
+	-- front sprites
+	spr(16, self.pos.x, self.pos.y, self.left, false)
 end
 
 
