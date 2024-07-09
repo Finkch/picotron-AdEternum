@@ -55,6 +55,7 @@ function Animation:__tostring()
     -- creates table that will be conterted to a string
     local tbl = {}
     tbl[self.name] = {
+        self:get().sprite,
         self.frame .. " / " .. self.dur * #self.sprites,
         sprs,
         self.dur
