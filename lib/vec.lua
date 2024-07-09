@@ -61,6 +61,13 @@ function Vec:normal()
     return self / self:mag()
 end
 
+function Vec:rotate(r)
+    return Vec:new(
+        self.x * cos(r) - self.y * sin(r),
+        self.x * sin(r) + self.y * cos(r)
+    )
+end
+
 
 -- vector-vector operations
 -- note: we overload existing operators to do this
