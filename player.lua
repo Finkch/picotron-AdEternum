@@ -5,6 +5,8 @@
 
 include("entity.lua")
 
+include("storage.lua")
+
 include("finkchlib/tstr.lua")
 
 Player = {}
@@ -13,16 +15,18 @@ setmetatable(Player, Entity)
 
 function Player:new(health)
 
-	local player = Entity.new(self, 2, health, 1, 12, 27)
+	local machine = player_state()
+
+	local player = Entity.new(self, machine, health, 1, 12, 27)
 
 	setmetatable(player, Player)
 	return player
 end
 
 function Player:draw()
-	Entity.draw(self)
 
-	spr(3, self.pos.x, self.pos.y, self.left, false)
+	-- main sprites
+	Entity.draw(self)
 end
 
 
