@@ -25,8 +25,8 @@ function player_state()
 
     animation = Animation:new(
         "idle",
-        {idle1, idle1, idle1, idle2},
-        16
+        {idle1, idle2},
+        {48, 16}
     )
 
     state = State:new(
