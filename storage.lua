@@ -13,14 +13,19 @@ include("states/machine.lua")
 
 function player_state()
 
-    sprite = Sprite:new(
+    idle1 = Sprite:new(
         8,
+        {}
+    )
+
+    idle2 = Sprite:new(
+        9,
         {}
     )
 
     animation = Animation:new(
         "idle",
-        {sprite},
+        {idle1, idle1, idle1, idle2},
         16
     )
 
