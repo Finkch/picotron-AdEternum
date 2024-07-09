@@ -61,11 +61,15 @@ function Vec:normal()
     return self / self:mag()
 end
 
-function Vec:rotate(r)
+function Vec:rotate(r) -- r E [0, 1]
     return Vec:new(
         self.x * cos(r) - self.y * sin(r),
         self.x * sin(r) + self.y * cos(r)
     )
+end
+
+function Vec:dir() -- r E [0, 1]
+    return atan2(self.y, self.x) + 0.5
 end
 
 
