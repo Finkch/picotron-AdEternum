@@ -4,6 +4,9 @@
 rm("/ram/cart/finkchlib") -- makes sure at most one copy is present
 mount("/ram/cart/finkchlib", "/ram/finkchlib")
 
+rm("/ram/cart/lib") -- makes sure at most one copy is present
+mount("/ram/cart/lib", "/ram/lib")
+
 include("lib/kbm.lua")
 include("lib/queue.lua")
 include("lib/clock.lua")
@@ -119,4 +122,11 @@ function _draw()
 			print(i // 8, 460, i)
 		end
 	end
+
+	local tc = Vec:new(240, 64)
+	local d = Vec:new(10, 0)
+	d = d:rotate(clock.f / 1000)
+
+	line(tc.x, tc.y, tc.x + d.x, tc.y + d.y, 8)
+	circ(tc.x, tc.y, 12, 8)
 end
