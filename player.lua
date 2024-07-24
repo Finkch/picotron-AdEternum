@@ -7,7 +7,7 @@ include("entity.lua")
 
 include("storage.lua")
 
-include("picotron-skeleton/gravedig.lua")
+include("storage/skeletons/graveyard.lua")
 
 include("finkchlib/tstr.lua")
 
@@ -21,7 +21,7 @@ rarm = --[[pod_type="gfx"]]unpod("b64:bHo0AC4AAAAuAAAA8RJweHUAQyAIEAQRUAUPEg8VQA
 
 function Player:new(health)
 
-	local skeleton = import(fetch("storage/skeletons/player.pod"))
+	local skeleton = player_skeleton()
 
 	local player = Entity.new(self, skeleton, health, 1, 8, 26)
 
