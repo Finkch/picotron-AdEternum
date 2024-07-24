@@ -21,7 +21,7 @@ function Entity:new(skeleton, health, mass, width, height, step)
         mass = mass,
         width = width,
         height = height,
-		centre = Vec:new(width, height) / 2,
+		centre = Vec:new(0, -height / 2),
         steps = step,	-- how many steps to take for one move
         pos = Vec:new(), vel = Vec:new(), acc = Vec:new(),
 		room = nil,
