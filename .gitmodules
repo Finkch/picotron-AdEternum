@@ -1,0 +1,3 @@
+[submodule "picotron-skeleton"]
+	path = picotron-skeleton
+	url = https://github.com/Finkch/picotron-skeleton
