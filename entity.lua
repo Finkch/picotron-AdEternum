@@ -10,13 +10,12 @@ Entity.__type = "entity"
 
 
 -- constructor
-function Entity:new(machine, health, mass, width, height, step)
+function Entity:new(skeleton, health, mass, width, height, step)
 	step = step or 4
     local e = {
 		id = nil,
-		sprite = nil,
         left = false,
-		machine = machine,
+		skeleton = skeleton,
 		state = false,	-- can't act without a state
         max_health = health, health = health,
         mass = mass,
@@ -36,7 +35,7 @@ end
 -- draws the entity
 function Entity:draw()
 
-    spr(self.sprite.sprite, self.pos.x, self.pos.y, self.left, false)
+	self.skeleton:draw(self.pos)
 
 	if (debug_visuals) rect(self.pos.x, self.pos.y, self.pos.x + self.width, self.pos.y + self.height, 18)
 end
@@ -44,8 +43,7 @@ end
 
 -- updates
 function Entity:update()
-	self.state = self.machine:update()
-	self.sprite = self.state:anim()
+	self.skeleton:update()
 end
 
 
@@ -65,7 +63,7 @@ function Entity:spawn(pos, id, room)
     self.pos = pos
 	self.id = id
 	self.room = room
-    self.state = self.machine.states[1]
+    self.state = true
     self.alive = true
     return self
 end
