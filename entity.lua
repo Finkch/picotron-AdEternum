@@ -37,7 +37,10 @@ function Entity:draw()
 
 	self.skeleton:draw(self.pos)
 
-	if (debug_visuals) rect(self.pos.x, self.pos.y, self.pos.x + self.width, self.pos.y + self.height, 18)
+	if (debug_visuals) then
+		local bounding = self:bounding()
+		rect(bounding[1].x, bounding[1].y, bounding[3].x, bounding[3].y, 8)
+	end
 end
 
 
