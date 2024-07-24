@@ -50,7 +50,7 @@ function _init()
 	cam = Camera:new()
 
 	-- whether to see debug visuals
-	debug_visuals = false
+	debug_visuals = true
 
 	-- whether to debug printout
 	debug_print = true
@@ -94,26 +94,35 @@ end
 function _draw()
 	cls(cl)
 	
+	-- sets focus to player
 	cam:focus(player)	
+	
+	-- moves camera (draws are now relative)
 	cam()
 
-	map(0, 0, 0, 0, 128, 32)
-
+	-- draws map
 	world:draw()
+
+	-- draws player
 	player:draw()
 	
+
+	-- resets camera (draws are now absolute)
 	cam(true)
 
-	if (debug_print) then -- performs printout, or not
-		debug:print()
-	else
-		debug:clear()
-	end
 
+
+	-- performs debug printout
+	if (debug_print) debug:print()
+	
+
+	-- draws line to show screen centre
+	--[[
 	if (debug_visuals) then
 		line(0, 135, 240, 135, 8)
 		line(240, 0, 240, 135, 8)
 	end
+	]]
 
 	-- prints colours out
 	for i = 0, 270 do
@@ -123,10 +132,10 @@ function _draw()
 		end
 	end
 
+	-- draws a little clock
 	local tc = Vec:new(240, 64)
 	local d = Vec:new(10, 0)
 	d = d:rotate(clock.f / 1000)
-
 	line(tc.x, tc.y, tc.x + d.x, tc.y + d.y, 8)
 	circ(tc.x, tc.y, 12, 8)
 end
