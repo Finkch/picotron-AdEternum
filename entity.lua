@@ -53,6 +53,7 @@ end
 -- gets bounding box
 function Entity:bounding(offset)
 	offset = offset or Vec:new(0, 0)
+	offset += Vec:new(-self.width // 2, -self.height)
 	return {
 		self.pos + offset,                                     -- top left
 		self.pos + Vec:new(self.width, 0) + offset,            -- top right
