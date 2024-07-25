@@ -1,28 +1,29 @@
 --[[pod_format="raw",created="2024-07-06 20:55:18",modified="2024-07-08 05:55:16",revision=635]]
 
 
--- represents the player character
+--[[
+	represents the player character
+
+]]
 
 include("entity.lua")
 
-include("storage.lua")
-
 include("storage/skeletons/graveyard.lua")
 
-include("finkchlib/tstr.lua")
+include("lib/tstr.lua")
+
 
 Player = {}
 Player.__index = Player
 setmetatable(Player, Entity)
 
--- arm sprite for texture mapping
-larm = --[[pod_type="gfx"]]unpod("b64:bHo0AC0AAAArAAAA8BxweHUAQyAEEAQQHxUADg0FABIFDg0PEh4cHgwOAA4NDgAOAQ4ABg0QFvAK")
-rarm = --[[pod_type="gfx"]]unpod("b64:bHo0AC4AAAAuAAAA8RJweHUAQyAIEAQRUAUPEg8VQAUPEhJAAQ4PFVABDVARDUADAIBQDw0GUBbwIw==")
 
 function Player:new(health)
 
+	-- grabs the skeleton from the graveyard
 	local skeleton = player_skeleton()
 
+	-- a player is pretty much just a specific type of entity
 	local player = Entity.new(self, skeleton, health, 1, 8, 26)
 
 
@@ -32,10 +33,7 @@ end
 
 
 function Player:draw()
-	
-	-- main sprites
 	Entity.draw(self)
-
 end
 
 
