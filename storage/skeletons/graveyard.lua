@@ -5,12 +5,13 @@
 
 include("picotron-skeleton/gravedig.lua")
 include("picotron-skeleton/skin.lua")
+include("picotron-skeleton/skeleton.lua")
 
 include("lib/vec.lua")
 
 function player_skeleton()
     local skeleton = import(fetch("storage/skeletons/player.pod"))
-    skeleton.debug = false
+    skeleton = ProceduralSkeleton:new(skeleton.core, skeleton.necromancer, false)
 
     -- adds skin
     local skins = {}
@@ -29,6 +30,20 @@ function player_skeleton()
 
     for name, bone in pairs(skeleton.bones) do
         if (skins[name]) bone:add(skins[name])
+    end
+
+
+    -- removes arms from any animations
+    local noanim = {
+        "right arm",
+        "right forearm",
+        "left arm",
+        "left forearm"
+    }
+
+    for name in all(noanim) do
+        -- adding the bone sets its transforms to zeroes
+        skeleton.necromancer:addbone(skeleton.bones[name])
     end
 
     return skeleton
