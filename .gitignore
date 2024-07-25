@@ -3,4 +3,5 @@
 !.git
 !.gitignore
 
-submod.sh
+# Ignore all script files
+scripts/
