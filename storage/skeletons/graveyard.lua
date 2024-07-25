@@ -6,6 +6,8 @@
 include("picotron-skeleton/gravedig.lua")
 include("picotron-skeleton/skin.lua")
 include("picotron-skeleton/skeleton.lua")
+include("picotron-skeleton/necromancer.lua")
+include("picotron-skeleton/transform.lua")
 
 include("lib/vec.lua")
 
@@ -45,6 +47,35 @@ function player_skeleton()
         -- adding the bone sets its transforms to zeroes
         skeleton.necromancer:addbone(skeleton.bones[name])
     end
+
+
+    -- creates the procedural animation for the arms
+    local pnecromancer = ProceduralNecromancer:new(noanim)
+
+    pnecromancer._get = function(self, bone)
+        
+        -- forearm angle is fixed
+        if (bone == "right forearm" or bone == "left forearm") return Transform:new()
+        
+        -- gets direction to target
+        local target = kbm.spos - cam.centre + Vec:new(0, 3) -- plus 3 is correction
+        local totarget = target - (self.skeleton.bones[bone].joint)
+
+        -- corrects for default position of each arm (t-pose)
+        local rot = -totarget:dir()
+        if (bone == "right arm") rot -= 0.25
+        if (bone == "left arm") rot += 0.25
+
+        -- returns appropriate rotation to aim towards target
+        return Transform:new(
+            Vec:new(),
+            rot
+        )
+    end
+
+    skeleton:addnecromancer(pnecromancer)
+
+
 
     return skeleton
 end
