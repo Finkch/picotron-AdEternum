@@ -2,3 +2,5 @@
 .*
 !.git
 !.gitignore
+
+submod.sh
