@@ -13,10 +13,18 @@ function player_skeleton()
 
     -- adds skin
     local skins = {}
-    skins["right arm"] = Skin:new(18, nil, Vec:new(0, 4))
-    skins["right forearm"] = Skin:new(19, nil, Vec:new(0, 4))
+    skins["right arm"] = Skin:new(18, true, nil, Vec:new(0, 4))
+    skins["right forearm"] = Skin:new(19, true, nil, Vec:new(0, 4))
     skins["left arm"] = skins["right arm"]
     skins["left forearm"] = skins["right forearm"]
+
+    skins["right leg"] = Skin:new(26, true, nil, Vec:new(0, 4))
+    skins["right foreleg"] = Skin:new(27, true, nil, Vec:new(0, 4))
+    skins["left leg"] = skins["right leg"]
+    skins["left foreleg"] = skins["right foreleg"]
+
+    skins["head"] = Skin:new(11, false, Vec:new(-2, -2))
+    skins["core"] = Skin:new(10, false, Vec:new(-2, -8))
 
     for name, bone in pairs(skeleton.bones) do
         if (skins[name]) bone:add(skins[name])
