@@ -34,7 +34,7 @@ function init_map(tile_width, tile_height)
 		Wall:new(Vec:new(-32, 64), Vec:new(512, 64))
 	}
 
-	local start = Room:new(-1, Vec:new(128, 255), walls)
+	local start = Room:new(-1, Vec:new(128, 32), walls)
 	map:add(start, {})
 
 	return map
