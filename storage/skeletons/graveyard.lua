@@ -14,18 +14,18 @@ function player_skeleton()
 
     -- adds skin
     local skins = {}
-    skins["right arm"] = TextureSkin:new(18, nil, Vec:new(0, 4))
-    skins["right forearm"] = TextureSkin:new(19, nil, Vec:new(0, 4))
-    skins["left arm"] = skins["right arm"]
-    skins["left forearm"] = skins["right forearm"]
+    skins["right arm"]      = TextureSkin:new(18, nil, Vec:new(0, 4))
+    skins["right forearm"]  = TextureSkin:new(19, nil, Vec:new(0, 4))
+    skins["left arm"]       = TextureSkin:new(18, nil, Vec:new(0, 4))
+    skins["left forearm"]   = TextureSkin:new(19, nil, Vec:new(0, 4))
 
-    skins["right leg"] = TextureSkin:new(26, nil, Vec:new(0, 4))
-    skins["right foreleg"] = TextureSkin:new(27, nil, Vec:new(0, 4))
-    skins["left leg"] = skins["right leg"]
-    skins["left foreleg"] = skins["right foreleg"]
+    skins["right leg"]      = TextureSkin:new(26, nil, Vec:new(0, 4))
+    skins["right foreleg"]  = TextureSkin:new(27, nil, Vec:new(0, 4))
+    skins["left leg"]       = TextureSkin:new(26, nil, Vec:new(0, 4))
+    skins["left foreleg"]   = TextureSkin:new(27, nil, Vec:new(0, 4))
 
-    skins["head"] = Skin:new(11, Vec:new(-2, -2))
-    skins["core"] = Skin:new(10, Vec:new(-2, -8))
+    skins["head"]           = Skin:new(11, Vec:new(-2, -2))
+    skins["core"]           = Skin:new(10, Vec:new(-2, -8))
 
     for name, bone in pairs(skeleton.bones) do
         if (skins[name]) bone:add(skins[name])
