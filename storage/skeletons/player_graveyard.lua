@@ -11,8 +11,14 @@ include("picotron-skeleton/transform.lua")
 
 include("lib/vec.lua")
 
+include("storage/msf.lua")
+
+
 function player_skeleton()
-    local skeleton = import(fetch("storage/skeletons/pods/player.pod"))
+
+    local tbl = fetch("storage/skeletons/pods/player.pod")
+    local skeleton = Skeleton:new(tbl)
+    
 
     -- concerts the skeleton into one that supports procedural animation
     skeleton = ProceduralSkeleton:new(skeleton.core, skeleton.necromancer, false)
