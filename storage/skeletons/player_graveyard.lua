@@ -18,7 +18,8 @@ function player_skeleton()
 
     local tbl = fetch("storage/skeletons/pods/player.pod")
     local skeleton = Skeleton:new(tbl)
-    
+
+    local os = Skeleton:new(tbl)
 
     -- concerts the skeleton into one that supports procedural animation
     skeleton = ProceduralSkeleton:new(skeleton.core, skeleton.necromancer, false)
@@ -29,6 +30,7 @@ function player_skeleton()
     -- adds procedural animation to the arms
     skeleton = pn_arms(skeleton)
 
+    msf(skeleton, "storage/skeletons/pods/nplayer.pod")
 
     return skeleton
 end
@@ -56,6 +58,7 @@ function addskin(skeleton)
     -- applies the map
     for name, bone in pairs(skeleton.bones) do
         if (skins[name]) bone:add(skins[name])
+        logger("mapped skin (" .. skins[name].sn .. ") to " .. name, "addskin.txt")
     end
 
     return skeleton
