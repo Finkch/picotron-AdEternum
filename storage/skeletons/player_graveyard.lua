@@ -30,6 +30,8 @@ end
 
 
 function addskin(skeleton)
+
+    -- gets a map of bone to skin
     local skins = {}
     skins["right arm"]      = TextureSkin:new(18, nil, Vec:new(0, 4))
     skins["right forearm"]  = TextureSkin:new(19, nil, Vec:new(0, 4))
@@ -44,6 +46,7 @@ function addskin(skeleton)
     skins["head"]           = Skin:new(11, Vec:new(-2, -2))
     skins["core"]           = Skin:new(10, Vec:new(-2, -8))
 
+    -- applies the map
     for name, bone in pairs(skeleton.bones) do
         if (skins[name]) bone:add(skins[name])
     end
