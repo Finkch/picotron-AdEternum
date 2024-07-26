@@ -16,7 +16,20 @@ function player_skeleton()
     skeleton = ProceduralSkeleton:new(skeleton.core, skeleton.necromancer, false)
 
 
-    -- adds skin
+    skeleton = addskin(skeleton)
+
+
+    skeleton = pn_arms(skeleton)
+
+
+
+    return skeleton
+end
+
+
+
+
+function addskin(skeleton)
     local skins = {}
     skins["right arm"]      = TextureSkin:new(18, nil, Vec:new(0, 4))
     skins["right forearm"]  = TextureSkin:new(19, nil, Vec:new(0, 4))
@@ -35,15 +48,21 @@ function player_skeleton()
         if (skins[name]) bone:add(skins[name])
     end
 
+    return skeleton
+end
 
-    -- removes arms from any animations
+
+
+-- [p]rocedural [n]ecromancer for arms
+function pn_arms(skeleton)
+    
+    -- list of bones to obey this necromancer
     local noanim = {
         "right arm",
         "right forearm",
         "left arm",
         "left forearm"
     }
-
 
 
     -- creates the procedural animation for the arms
@@ -71,8 +90,6 @@ function player_skeleton()
     end
 
     skeleton:addnecromancer(pnecromancer)
-
-
 
     return skeleton
 end
