@@ -12,6 +12,8 @@ include("picotron-skeleton/skeleton.lua")
 -- path is relative to AE: ex, "storage/skeletons/pods/player.pod"
 function msf(obj, path)
 
+    cd(env().path)
+
     obj = modify(obj)
 
     put(path, obj)
@@ -21,11 +23,19 @@ end
 
 
 function put(path, obj)
-    store("ram/cart/" .. path, obj:pod())
+    path = "/ram/car/" .. path
+    store(path, obj:pod())
 end
 
 function get(path)
-    return objectify(fetch("ram/cart/" .. path))
+    path = "/ram/cart/" .. path
+    
+    local tbl = fetch(path)
+
+    if (not fstat(path)) error("invalid path \"" .. path .. "\"")
+    if (not tbl) error("unable to get pod at path \"" .. path .. "\"")
+
+    return objectify(tbl)
 end
 
 
@@ -41,7 +51,6 @@ function objectify(tbl)
 
     if (tbl.__type == "pod") then
         if (tbl.__totype == "skeleton") then
-            logger("objectifying skele", "progress.txt")
             return Skeleton:new(tbl)
         elseif (tbl.__totype == "proceduralskeleton") then
             return ProceduralSkeleton:new(tbl)
