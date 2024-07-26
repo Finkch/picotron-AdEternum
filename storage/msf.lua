@@ -41,12 +41,14 @@ function objectify(data)
 
     local tbl = unpod(data)
 
-    if (tbl.__type == "skeleton") then
-        return Skeleton:new(tbl)
-    elseif (tbl.__type == "proceduralskeleton") then
-        return ProceduralSkeleton:new(tbl)
-    else
-        logger(time() .. "\n\n" .. tstr(tbl), "depod.txt")
-        error("cannot objectify unknown .__type \"" .. tostr(tbl.__type) .. "\". see 'appdata/ae/logs/depod.txt' for table readout")
+    if (tbl.__type == "pod")
+        if (tbl.__totype == "skeleton") then
+            return Skeleton:new(tbl)
+        elseif (tbl.__totype == "proceduralskeleton") then
+            return ProceduralSkeleton:new(tbl)
+        end
     end
+
+    logger(time() .. "\n\n" .. tstr(tbl), "depod.txt")
+    error("cannot objectify unknown .__type \"" .. tostr(tbl.__type) .. "\" -> \"" .. tostr(tbl.__totype) .. "\". see 'appdata/ae/logs/depod.txt' for table readout")
 end
