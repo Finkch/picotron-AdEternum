@@ -9,7 +9,7 @@ include("picotron-skeleton/skeleton.lua")
 
 -- [m]odify, [s]tore, [f]etch
 -- make permanent modifications to the skeleton.
--- path is relative to AE! ex, "storage/skeletons/pods/player.pod"
+-- path is relative to AE: ex, "storage/skeletons/pods/player.pod"
 function msf(obj, path)
 
     obj = modify(obj)
@@ -21,11 +21,11 @@ end
 
 
 function put(path, obj)
-    store(path, obj:pod())
+    store("ram/cart/" .. path, obj:pod())
 end
 
 function get(path)
-    return objectify(fetch(path))
+    return objectify(fetch("ram/cart/" .. path))
 end
 
 
@@ -37,12 +37,11 @@ function modify(obj) return obj end
 
 
 -- looks through a table of types and returns the applicable object instance
-function objectify(data)
+function objectify(tbl)
 
-    local tbl = unpod(data)
-
-    if (tbl.__type == "pod")
+    if (tbl.__type == "pod") then
         if (tbl.__totype == "skeleton") then
+            logger("objectifying skele", "progress.txt")
             return Skeleton:new(tbl)
         elseif (tbl.__totype == "proceduralskeleton") then
             return ProceduralSkeleton:new(tbl)
