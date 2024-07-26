@@ -8,7 +8,7 @@
 
 include("entity.lua")
 
-include("storage/skeletons/graveyard.lua")
+include("storage/skeletons/player_graveyard.lua")
 
 include("lib/tstr.lua")
 
