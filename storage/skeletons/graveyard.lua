@@ -12,8 +12,9 @@ include("picotron-skeleton/transform.lua")
 include("lib/vec.lua")
 
 function player_skeleton()
-    local skeleton = import(fetch("storage/skeletons/player.pod"))
+    local skeleton = import(fetch("storage/skeletons/pods/player.pod"))
     skeleton = ProceduralSkeleton:new(skeleton.core, skeleton.necromancer, false)
+
 
     -- adds skin
     local skins = {}
@@ -43,10 +44,6 @@ function player_skeleton()
         "left forearm"
     }
 
-    for name in all(noanim) do
-        -- adding the bone sets its transforms to zeroes
-        skeleton.necromancer:addbone(skeleton.bones[name])
-    end
 
 
     -- creates the procedural animation for the arms
