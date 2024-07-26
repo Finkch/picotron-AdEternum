@@ -13,14 +13,15 @@ include("lib/vec.lua")
 
 function player_skeleton()
     local skeleton = import(fetch("storage/skeletons/pods/player.pod"))
+
+    -- concerts the skeleton into one that supports procedural animation
     skeleton = ProceduralSkeleton:new(skeleton.core, skeleton.necromancer, false)
 
-
+    -- maps skin onto the bones
     skeleton = addskin(skeleton)
 
-
+    -- adds procedural animation to the arms
     skeleton = pn_arms(skeleton)
-
 
 
     return skeleton
