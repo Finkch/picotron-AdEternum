@@ -12,22 +12,28 @@ include("picotron-skeleton/skeleton.lua")
 -- path is relative to AE! ex, "storage/skeletons/pods/player.pod"
 function msf(obj, path)
 
-    obj  = modify(obj)
+    obj = modify(obj)
 
-    store(path, export(obj))
+    put(path, obj)
 
     return get(path)
 end
 
-function modify(obj) return obj end         -- this should be overridden or editted
 
 function put(path, obj)
     store(path, obj:pod())
 end
 
 function get(path)
-    return unpod(fetch(path))
+    return objectify(fetch(path))
 end
+
+
+
+-- this should be overridden or editted
+function modify(obj) return obj end
+
+
 
 
 -- looks through a table of types and returns the applicable object instance
