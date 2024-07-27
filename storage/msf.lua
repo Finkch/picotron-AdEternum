@@ -11,6 +11,7 @@ include("picotron-skeleton/skeleton.lua")
 -- make permanent modifications to the skeleton.
 -- path is relative to AE: ex, "storage/skeletons/pods/player.pod"
 function msf(obj, path)
+    path = "/ram/cart/" .. path
 
     cd(env().path)
 
@@ -23,13 +24,10 @@ end
 
 
 function put(path, obj)
-    path = "/ram/car/" .. path
     store(path, obj:pod())
 end
 
 function get(path)
-    path = "/ram/cart/" .. path
-    
     local tbl = fetch(path)
 
     if (not fstat(path)) error("invalid path \"" .. path .. "\"")
